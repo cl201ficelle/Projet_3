@@ -125,6 +125,27 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+/*  *******************************************************FILTRE*********************************** */
+.divFiltres{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin-bottom: 30px;
+	
+}
+
+.divFiltres button{
+	font-family: 'Syne';
+	background-color: white;
+	padding: 10px 15px;
+	font-size: 1em;
+	font-weight: 700;
+	border-radius: 20px;
+	border-style: none;
+	border: #1D6154 1px solid;
+}
+
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -185,4 +206,5 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
 
