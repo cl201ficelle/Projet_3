@@ -17,8 +17,8 @@ promise
         for (let i= 0; i<allWorks.length; i++){
             // on récupère la balise div avec classe gallery déjà présente dans html
             let gallery = document.querySelector(".gallery");
-            // on crée une balise div qui contiendra chaque élément work
-            const workElement = document.createElement("div");
+            // on crée une balise figure qui contiendra chaque élément work
+            const workElement = document.createElement("figure");
             // on crée une balise image
             const imgElement = document.createElement("img");
             // on met la source des images, que je connais grâce console.log(allWorks). on utilise l'indice i, comme ca on va obtenir chaque élémént de la liste de l'api.
