@@ -162,10 +162,15 @@ li:hover {
 	width: 100%;
 
 }
-#contact, #formulaire_connection {
+#contact #formulaire_connection {
 	width: 50%;
 margin: auto;
 }
+#formulaire_connection{
+	width: 35%;
+margin: auto;
+}
+
 #contact > * {
 	text-align: center;
 
@@ -214,6 +219,13 @@ footer nav ul {
 .mdpoublie {
 	text-align: center;
 	color: black;
+}
+#formulaire_connection{
+	margin-top: 150px;
+}
+html{
+	background-color: #FFFEF8;
+	;
 }
 html,
 body {
