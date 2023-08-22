@@ -19,6 +19,7 @@ promise2
     const promise3 =  response.json();
 
     promise3.then((categories) => {
+        
         // console.log(categories)
         let buttonFiltreTous = document.createElement("button")
             buttonFiltreTous.innerText = "Tous"
@@ -27,9 +28,22 @@ promise2
             buttonFiltreTous.addEventListener("click", () => {
             //background vert 
             buttonFiltreTous.style.backgroundColor = "#1D6154"
-            buttonFiltreTous.style.color = "white"   
+            buttonFiltreTous.style.color = "white"
+            const allElement = allWorks 
+
+           
+
+
             });
                 
+
+
+
+
+
+
+
+
             
     //    boucle for pour récupérer toutes les catégories i
     // mise en place du compteur : initialisation de i, pour i < longueur catégories, on incrémente i
@@ -40,16 +54,13 @@ promise2
             buttonFiltre.addEventListener("click", () => {
                 //background vert 
                 buttonFiltre.style.backgroundColor = "#1D6154"
-                buttonFiltre.style.color = "white"   
+                buttonFiltre.style.color = "white"
+                 // admettons que j'ai réussi à récupérer les deux fetch categories et allWorks : ajout fonction filtre
+            const elementFiltres = allWorks.filter(function(allWorks, categories){
+                return allWorks.name === categories.name
+            })   
                 });
-//             buttonFiltre.addEventListener("click", function () {
-//                 for(let i=0; i<categories.length; i++){
-//                     const elementFiltres = categories.filter(function(categories){
-//                         return categories.id[i]
-//                     })
-//                 }
-//     // ...
-// });
+
             
              }
               
