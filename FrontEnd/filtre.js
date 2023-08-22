@@ -23,6 +23,13 @@ promise2
         let buttonFiltreTous = document.createElement("button")
             buttonFiltreTous.innerText = "Tous"
             divFiltres.appendChild(buttonFiltreTous)
+            // ajout event listener pour changer couleur au click
+            buttonFiltreTous.addEventListener("click", () => {
+            //background vert 
+            buttonFiltreTous.style.backgroundColor = "#1D6154"
+            buttonFiltreTous.style.color = "white"   
+            });
+                
             
     //    boucle for pour récupérer toutes les catégories i
     // mise en place du compteur : initialisation de i, pour i < longueur catégories, on incrémente i
@@ -30,6 +37,11 @@ promise2
             const buttonFiltre = document.createElement("button")
             buttonFiltre.innerText = categories[i].name;
             divFiltres.appendChild(buttonFiltre)
+            buttonFiltre.addEventListener("click", () => {
+                //background vert 
+                buttonFiltre.style.backgroundColor = "#1D6154"
+                buttonFiltre.style.color = "white"   
+                });
 //             buttonFiltre.addEventListener("click", function () {
 //                 for(let i=0; i<categories.length; i++){
 //                     const elementFiltres = categories.filter(function(categories){
