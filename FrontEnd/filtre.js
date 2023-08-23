@@ -29,7 +29,7 @@ promise2
             //background vert 
             buttonFiltreTous.style.backgroundColor = "#1D6154"
             buttonFiltreTous.style.color = "white"
-            const allElement = allWorks 
+            // const allElement = allWorks 
 
            
 
@@ -56,9 +56,9 @@ promise2
                 buttonFiltre.style.backgroundColor = "#1D6154"
                 buttonFiltre.style.color = "white"
                  // admettons que j'ai réussi à récupérer les deux fetch categories et allWorks : ajout fonction filtre
-            const elementFiltres = allWorks.filter(function(allWorks, categories){
-                return allWorks.name === categories.name
-            })   
+            // const elementFiltres = allWorks.filter(function(allWorks, categories){
+                // return allWorks.name === categories.name
+            // })   
                 });
 
             
