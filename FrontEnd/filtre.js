@@ -11,6 +11,8 @@ divFiltres.setAttribute("class", "divFiltres");
 portfolio.insertBefore(divFiltres,gallery)
 
 
+
+filtre ()
 promise2 = fetch("http://localhost:5678/api/categories")
 // deux then car promise
 promise2
@@ -20,37 +22,32 @@ promise2
 
     promise3.then((categories) => {
         
-        // console.log(categories)
+        // creation bouton Tous car pas dans Api
         let buttonFiltreTous = document.createElement("button")
+        // je met dans le bouton le texte qu'il doit contenir
             buttonFiltreTous.innerText = "Tous"
             divFiltres.appendChild(buttonFiltreTous)
             // ajout event listener pour changer couleur au click
             buttonFiltreTous.addEventListener("click", () => {
-            //background vert 
+            //background vert/écriture blanc
             buttonFiltreTous.style.backgroundColor = "#1D6154"
             buttonFiltreTous.style.color = "white"
-            // const allElement = allWorks 
-
-           
-
-
-            });
+            
+        });
                 
-
-
-
-
-
-
 
 
             
     //    boucle for pour récupérer toutes les catégories i
     // mise en place du compteur : initialisation de i, pour i < longueur catégories, on incrémente i
         for (let i= 0; i<categories.length; i++){
+            // création bouton autant de bouton qu'il y a de catégorie dans la section catégories de l'api
             const buttonFiltre = document.createElement("button")
+            // je donne au bouton le nom des catégories
             buttonFiltre.innerText = categories[i].name;
+            // je mets ces boutons dans la div que je veux
             divFiltres.appendChild(buttonFiltre)
+            // j'ajoute les changements de style au moment du click
             buttonFiltre.addEventListener("click", () => {
                 //background vert 
                 buttonFiltre.style.backgroundColor = "#1D6154"

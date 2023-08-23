@@ -31,7 +31,7 @@ promise
             gallery.appendChild(workElement)
             // on met les images dans chaque div workElement
             workElement.appendChild(imgElement)
-            // on met chaque gigcaption dans chaque div workElement
+            // on met chaque figcaption dans chaque div workElement
             workElement.appendChild(figCaption)
 
             
