@@ -10,9 +10,20 @@ divFiltres.setAttribute("class", "divFiltres");
 // on met cette div dans section portfolio, j'utilise insertBefore pour que la div se mette au dessus de gallery
 portfolio.insertBefore(divFiltres,gallery)
 
+//  obtenir toutes les catégories variable globale
+async function getAllCategories (){
+    const response = await fetch ("http://localhost:5678/api/categories")
+    const allCategories = await response.json()
+    console.log(allCategories)
+}
+
+getAllCategories()
+
+// obtenir tous les travaux
+async function getAllWorks()
 
 
-filtre ()
+
 promise2 = fetch("http://localhost:5678/api/categories")
 // deux then car promise
 promise2
@@ -68,3 +79,5 @@ promise2
         
 
     });
+
+   
