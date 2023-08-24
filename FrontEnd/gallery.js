@@ -1,7 +1,9 @@
 // effacer contenu gallery
+function deleteGalleryWorks(){
 let gallery = document.querySelector(".gallery")
 gallery.innerHTML = ''
-
+}
+deleteGalleryWorks()
 
 async function getAllWorks (){
     let response = await fetch ("http://localhost:5678/api/works")
