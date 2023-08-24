@@ -17,10 +17,9 @@ async function getAllCategories (){
     console.log(allCategories)
 }
 
-getAllCategories()
+// getAllCategories()
 
-// obtenir tous les travaux
-async function getAllWorks()
+
 
 
 

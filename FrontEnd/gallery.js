@@ -3,17 +3,22 @@ let gallery = document.querySelector(".gallery")
 gallery.innerHTML = ''
 
 
-// récupérer works de l'api
-const promise = fetch("http://localhost:5678/api/works")
-// deux then car promise
-promise
-.then((response) => {
-   
-    const promise2 =  response.json();
+async function getAllWorks (){
+    let response = await fetch ("http://localhost:5678/api/works")
+    let allWorks = await response.json()
+    localStorage.setItem("mydata", JSON.stringify(allWorks))
+  
+    
+}
+getAllWorks()
+let allWorks = JSON.parse(localStorage.getItem("mydata"))
 
-    promise2.then((allWorks) => {
-    //    boucle for pour récupérer toutes les images i
-    // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
+ console.log(allWorks.length)
+
+
+function genererGallery(){
+         
+        // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
         for (let i= 0; i<allWorks.length; i++){
             // on récupère la balise div avec classe gallery déjà présente dans html
             let gallery = document.querySelector(".gallery");
@@ -35,10 +40,10 @@ promise
             workElement.appendChild(figCaption)
 
             
+        };
+         
         }
-        
 
-    });
-})
+        genererGallery()
 
 
