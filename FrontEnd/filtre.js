@@ -17,6 +17,11 @@ divFiltres.setAttribute("class", "divFiltres");
 // on met cette div dans section portfolio, j'utilise insertBefore pour que la div se mette au dessus de gallery
 portfolio.insertBefore(divFiltres,gallery)
 
+// recuperation categorieID de chaque travaux
+// function getAllWorksCategoryID {
+// const categoryID = allWorks.categoryID
+// console.log(categoryID)}
+
 //  obtenir toutes les catégories variable globale
 async function getAllCategories (){
     let response = await fetch ("http://localhost:5678/api/categories")
@@ -42,6 +47,11 @@ function buttonFiltreTous(){
     //background vert/écriture blanc
     buttonFiltreTous.style.backgroundColor = "#1D6154"
     buttonFiltreTous.style.color = "white"
+    const tousWorks = allWorks.filter(function(allWorks){
+      return allWorks
+       
+    })
+    console.log(tousWorks) 
     })}
 
 buttonFiltreTous()
@@ -57,11 +67,17 @@ function buttonFiltresAll (){
         buttonFiltre.innerText = allCategories[i].name;
         // je mets ces boutons dans la div que je veux
         divFiltres.appendChild(buttonFiltre)
+        console.log(buttonFiltre.textContent)
          // j'ajoute les changements de style au moment du click
          buttonFiltre.addEventListener("click", () => {
         //background vert
         buttonFiltre.style.backgroundColor = "#1D6154"
         buttonFiltre.style.color = "white"
+        const Works = allWorks.filter(function(allWorks){
+        return allWorks.category.name === buttonFiltre.textContent
+             
+          })
+          console.log(Works)
         })
     }
 }
@@ -69,7 +85,7 @@ function buttonFiltresAll (){
 buttonFiltresAll()
     
 
- 
-        
+console.table(allCategories)
+console.log(allWorks)
 
    
