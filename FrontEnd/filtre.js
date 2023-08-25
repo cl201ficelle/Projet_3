@@ -1,7 +1,14 @@
+// import {getAllWorks} from "gallery.js";
+// getAllWorks()
+// let allWorks = JSON.parse(localStorage.getItem("mydata"))
+
+//  console.log(allWorks.length)
+
 
 
 // Récupération section portfolio
 const portfolio = document.getElementById("portfolio")
+let gallery = document.querySelector(".gallery")
 // console.log(portfolio)
 // création div pour accueillir les filtres
 const divFiltres = document.createElement("div")
@@ -12,16 +19,17 @@ portfolio.insertBefore(divFiltres,gallery)
 
 //  obtenir toutes les catégories variable globale
 async function getAllCategories (){
-    const response = await fetch ("http://localhost:5678/api/categories")
-    const allCategories = await response.json()
-    console.log(allCategories)
+    let response = await fetch ("http://localhost:5678/api/categories")
+    let allCategories = await response.json()
+    // mettre dans local storage 
+    localStorage.setItem("mydata2", JSON.stringify(allCategories))  
 }
 
-// getAllCategories()
 
+getAllCategories()
+let allCategories = JSON.parse(localStorage.getItem("mydata2"))
 
-
-
+// export/import ne fonctionne pas mais mes données de la fonction getAllWorks sont bien la donc pour l'instant je continue
 
 promise2 = fetch("http://localhost:5678/api/categories")
 // deux then car promise

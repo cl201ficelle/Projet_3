@@ -8,6 +8,7 @@ deleteGalleryWorks()
 async function getAllWorks (){
     let response = await fetch ("http://localhost:5678/api/works")
     let allWorks = await response.json()
+    // mettre dans local storage 
     localStorage.setItem("mydata", JSON.stringify(allWorks))
   
     
@@ -15,7 +16,6 @@ async function getAllWorks (){
 getAllWorks()
 let allWorks = JSON.parse(localStorage.getItem("mydata"))
 
- console.log(allWorks.length)
 
 
 function genererGallery(){
