@@ -47,15 +47,33 @@ function buttonFiltreTous(){
     //background vert/écriture blanc
     buttonFiltreTous.style.backgroundColor = "#1D6154"
     buttonFiltreTous.style.color = "white"
-    const tousWorks = allWorks.filter(function(allWorks){
-      return allWorks
+    const tousTravaux = allWorks.filter(function(tousTravaux){
+      return tousTravaux
        
     })
-    console.log(tousWorks) 
+    document.querySelector(".gallery").innerHTML = ""
+    genererGallery(tousTravaux)
+    console.log(tousTravaux) 
     })}
 
 buttonFiltreTous()
    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function buttonFiltresAll (){
     // //    boucle for pour récupérer toutes les catégories i
@@ -73,11 +91,13 @@ function buttonFiltresAll (){
         //background vert
         buttonFiltre.style.backgroundColor = "#1D6154"
         buttonFiltre.style.color = "white"
-        const Works = allWorks.filter(function(allWorks){
+        const worksByCategory = allWorks.filter(function(allWorks){
         return allWorks.category.name === buttonFiltre.textContent
              
           })
-          console.log(Works)
+        document.querySelector(".gallery").innerHTML = ""
+        genererGallery(worksByCategory)
+        console.log(worksByCategory)
         })
     }
 }
@@ -87,5 +107,3 @@ buttonFiltresAll()
 
 console.table(allCategories)
 console.log(allWorks)
-
-   

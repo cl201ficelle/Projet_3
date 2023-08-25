@@ -46,6 +46,6 @@ function genererGallery(){
          
         }
 
-        genererGallery()
+        genererGallery(allWorks)
 
 
