@@ -75,7 +75,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -237,4 +237,8 @@ body{
 }
 main{
 	flex-grow: 1;
+}
+::placeholder{
+	font-family: 'Work Sans';
+	font-size: 0.7em;
 }
