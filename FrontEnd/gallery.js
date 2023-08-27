@@ -85,7 +85,6 @@ async function getAllCategories (){
 getAllCategories()
 let allCategories = JSON.parse(localStorage.getItem("mydata2"))
 
-// export/import ne fonctionne pas mais mes données de la fonction getAllWorks sont bien la donc pour l'instant je continue
 
 function buttonFiltreTous(){ 
      // creation bouton Tous car pas dans Api
@@ -93,13 +92,17 @@ function buttonFiltreTous(){
     // je met dans le bouton le texte qu'il doit contenir
     buttonFiltreTous.innerText = "Tous"
     divFiltres.appendChild(buttonFiltreTous)
+    showTous(buttonFiltreTous)
     // ajout event listener pour changer couleur au click
+    }
+
+function showTous(buttonFiltreTous){
     buttonFiltreTous.addEventListener("click", () => {
     //background vert/écriture blanc
     buttonFiltreTous.style.backgroundColor = "#1D6154"
     buttonFiltreTous.style.color = "white"
     const tousTravaux = allWorks.filter(function(tousTravaux){
-      return tousTravaux
+    return tousTravaux
        
     })
     document.querySelector(".gallery").innerHTML = ""
@@ -107,22 +110,9 @@ function buttonFiltreTous(){
     console.log(tousTravaux) 
     })}
 
+
 buttonFiltreTous()
    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -137,24 +127,28 @@ function buttonFiltresAll (){
         // je mets ces boutons dans la div que je veux
         divFiltres.appendChild(buttonFiltre)
         console.log(buttonFiltre.textContent)
+        showFiltered(buttonFiltre)
+    }}
+
+ function showFiltered (buttonFiltre){      
          // j'ajoute les changements de style au moment du click
-         buttonFiltre.addEventListener("click", () => {
+        buttonFiltre.addEventListener("click", () => {
         //background vert
         buttonFiltre.style.backgroundColor = "#1D6154"
         buttonFiltre.style.color = "white"
         const worksByCategory = allWorks.filter(function(allWorks){
         return allWorks.category.name === buttonFiltre.textContent
              
-          })
+        })
         document.querySelector(".gallery").innerHTML = ""
         genererGallery(worksByCategory)
         console.log(worksByCategory)
         })
     }
-}
+
 
 buttonFiltresAll()
     
 
 console.table(allCategories)
-console.log(allWorks)
+console.table(allWorks)
