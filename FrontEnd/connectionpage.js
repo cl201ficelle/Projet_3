@@ -34,8 +34,10 @@ console.log(Log.textContent)
         if (data.token) {
             alert("Connexion réussie");
             sessionStorage.setItem("token", data.token);
+
         //   redirection accueil
             window.location.href = 'index.html'; 
+            Log.innerText="GDFFFFFFFFFF"
         } else {
           throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe"); 
         }
@@ -48,13 +50,13 @@ console.log(Log.textContent)
   
 // if user click sur #Log quand il y a token dans local storage alors cette fonction est activée
 function LogOut (){
-    localStorage.removeItem("token")
+  sessionStorage.removeItem("token")
 }
 function getToken(){
-    return localStorage.getItem("token")
+    return sessionStorage.getItem("token")
 }
 // si le token est différent de null alors le text de #log est logout
 function isConnected(){
-    return getToken() !== '',
-    Log.innerText="logout"
+    return getToken() !== null
+    
 }

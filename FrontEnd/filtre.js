@@ -8,11 +8,7 @@ const divFiltres = document.createElement("div")
 divFiltres.setAttribute("class", "divFiltres");
 // on met cette div dans section portfolio, j'utilise insertBefore pour que la div se mette au dessus de gallery
 portfolio.insertBefore(divFiltres,gallery)
-
-// recuperation categorieID de chaque travaux
-// function getAllWorksCategoryID {
-// const categoryID = allWorks.categoryID
-// console.log(categoryID)}
+let activeButton = null
 
 //  obtenir toutes les catégories variable globale
 async function getAllCategories (){
@@ -39,12 +35,16 @@ function buttonFiltreTous(){
 
 function showTous(buttonFiltreTous){
     buttonFiltreTous.addEventListener("click", () => {
-    //background vert/écriture blanc
-    buttonFiltreTous.style.backgroundColor = "#1D6154"
-    buttonFiltreTous.style.color = "white"
+        // s'il y a un bouton actif on enleve le style au bouton précédemment actif
+        if (activeButton) {
+            removeButtonStyle(activeButton)
+        }
+        // on applique ce style au bouton maintenant actif
+        setButtonStyle(buttonFiltreTous)
+        // Mettez à jour le bouton actif
+        activeButton = buttonFiltreTous;
     const tousTravaux = allWorks.filter(function(tousTravaux){
-    return tousTravaux
-       
+    return tousTravaux   
     })
     document.querySelector(".gallery").innerHTML = ""
     genererGallery(tousTravaux)
@@ -52,10 +52,8 @@ function showTous(buttonFiltreTous){
     })}
 
 
-buttonFiltreTous()
+buttonFiltreTous(buttonFiltreTous)
    
-
-
 
 function buttonFiltresAll (){
     // //    boucle for pour récupérer toutes les catégories i
@@ -64,7 +62,7 @@ function buttonFiltresAll (){
         // création bouton autant de bouton qu'il y a de catégorie dans la section catégories de l'api
         const buttonFiltre = document.createElement("button") 
         // je donne au bouton le nom des catégories
-        buttonFiltre.innerText = allCategories[i].name;
+        buttonFiltre.innerText = allCategories[i].name
         // je mets ces boutons dans la div que je veux
         divFiltres.appendChild(buttonFiltre)
         console.log(buttonFiltre.textContent)
@@ -74,9 +72,14 @@ function buttonFiltresAll (){
  function showFiltered (buttonFiltre){      
          // j'ajoute les changements de style au moment du click
         buttonFiltre.addEventListener("click", () => {
-        //background vert
-        buttonFiltre.style.backgroundColor = "#1D6154"
-        buttonFiltre.style.color = "white"
+            // s'il y a un bouton actif on enleve le style au bouton précédemment actif
+            if (activeButton) {
+                removeButtonStyle(activeButton)
+            }
+            // on applique ce style au bouton maintenant actif
+            setButtonStyle(buttonFiltre)
+            // Mettez à jour le bouton actif
+            activeButton = buttonFiltre
         const worksByCategory = allWorks.filter(function(allWorks){
         return allWorks.category.name === buttonFiltre.textContent
              
@@ -89,7 +92,17 @@ function buttonFiltresAll (){
 
 
 buttonFiltresAll()
-    
+// style du bouton actif  
+function setButtonStyle(button){
+    button.style.backgroundColor = "#1D6154"
+    button.style.color = "white" 
+}
+// style bouton non actif
+function removeButtonStyle(button){
+    button.style.backgroundColor = "#FFFEF8"
+    button.style.color = "black" 
+}
+
 
 console.table(allCategories)
 console.table(allWorks)
