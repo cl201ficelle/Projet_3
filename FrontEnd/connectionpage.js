@@ -74,6 +74,9 @@ function recupererInputValue(){
     }
   })
 }
+
+// si champ vide quand submit : boxshadow
+// regex deja présent par défaut
 function verifierChamp(balise){
   if (balise.value ===""){
     balise.style.boxShadow = "0px 0px 20px #9e1e1e"
