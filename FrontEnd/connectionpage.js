@@ -27,13 +27,15 @@ function submit(username, password) {
 
       if (data.token) {
           alert("Connexion réussie");
-          sessionStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.token);
 
       //   redirection accueil
           // window.location.href = 'index.html'; 
-          Log.innerText="Logout"
+          Log.innerText="logout"
+    
+
       } else {
-        throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe"); 
+        throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe, veuillez réessayer"); 
       }
     })
     .catch((error)=> {
@@ -53,10 +55,10 @@ let {userEmailValue, userPasswordValue} = recupererInputValue()
 
 // if user click sur #Log quand il y a token dans local storage alors cette fonction est activée
 function LogOut (){
-  sessionStorage.removeItem("token")
+  localStorage.removeItem("token")
 }
 function getToken(){
-    return sessionStorage.getItem("token")
+    return localStorage.getItem("token")
 }
 // si le token est différent de null alors le text de #log est logout
 function isConnected(){
@@ -65,7 +67,11 @@ function isConnected(){
 }
 isConnected()
 
-
+if (localStorage.getItem('token')) {
+  console.log('Le localStorage contient un token.');
+} else {
+  console.log('Le localStorage ne contient pas de token.');
+} 
 
 let Log = document.getElementById("Log")
 console.log(Log.textContent)
