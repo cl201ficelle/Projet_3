@@ -65,7 +65,7 @@ function buttonFiltresAll (){
         buttonFiltre.innerText = allCategories[i].name
         // je mets ces boutons dans la div que je veux
         divFiltres.appendChild(buttonFiltre)
-        console.log(buttonFiltre.textContent)
+        // console.log(buttonFiltre.textContent)
         showFiltered(buttonFiltre)
     }}
 
@@ -86,7 +86,7 @@ function buttonFiltresAll (){
         })
         document.querySelector(".gallery").innerHTML = ""
         genererGallery(worksByCategory)
-        console.log(worksByCategory)
+        // console.log(worksByCategory)
         })
     }
 
@@ -104,8 +104,8 @@ function removeButtonStyle(button){
 }
 
 
-console.table(allCategories)
-console.table(allWorks)
+// console.table(allCategories)
+// console.table(allWorks)
 
 
 
