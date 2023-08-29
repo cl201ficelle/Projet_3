@@ -48,6 +48,8 @@ function recupererInputValue(){
     // pour ne pas que la page se rafraichit au submit
   document.getElementById("login").addEventListener("submit", function (event) {
       event.preventDefault();
+      verifierChamp(email)
+      verifierChamp(password)
     let {userEmailValue, userPasswordValue} = recupererInputValue()
       submit(userEmailValue, userPasswordValue)
       if (localStorage.getItem("token") !==''){
@@ -72,7 +74,12 @@ function recupererInputValue(){
     }
   })
 }
-
+function verifierChamp(balise){
+  if (balise.value ===""){
+    balise.style.boxShadow = "0px 0px 20px #9e1e1e"
+    
+  }
+}
   
 login()
 isConnected()
