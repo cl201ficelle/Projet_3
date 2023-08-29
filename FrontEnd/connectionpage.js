@@ -72,5 +72,7 @@ function recupererInputValue(){
     }
   })
 }
+
   
-  login()
+login()
+isConnected()
