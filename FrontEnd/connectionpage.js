@@ -48,8 +48,7 @@ function recupererInputValue(){
     // pour ne pas que la page se rafraichit au submit
   document.getElementById("login").addEventListener("submit", function (event) {
       event.preventDefault();
-  
-  let {userEmailValue, userPasswordValue} = recupererInputValue()
+    let {userEmailValue, userPasswordValue} = recupererInputValue()
       submit(userEmailValue, userPasswordValue)
       if (localStorage.getItem("token") !==''){
     console.log("utilisateur connecté")
@@ -62,11 +61,16 @@ function recupererInputValue(){
     localStorage.removeItem("token")
     Log.innerText="login"
   }
+
+  function isConnected(){
   Log.addEventListener('click', function(){
-    if (localStorage.getItem("token") !==''){
+    if (localStorage.getItem("token")){
       LogOut()
       console.log("utilisateur deconnecté")
+    }else{
+      window.location.href = "connectionpage.html"
     }
   })
+}
   
   login()
