@@ -4,6 +4,9 @@ function LogOut(){
     Log.innerText="login"
     // supprime le lien modif
     h2modif.innerHTML='<h2 class="titreMesProjets">Mes Projets</h2>'
+    buttonFiltreTous()
+    buttonFiltresAll()
+    
   }
 
 
@@ -29,6 +32,7 @@ if (localStorage.getItem('token')) {
     console.log('Le localStorage contient un token.');
     Log.innerHTML='logout'
     creationLienModif()
+    divFiltres.innerHTML=''
     
 }
 }

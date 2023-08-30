@@ -41,7 +41,7 @@ function showTous(buttonFiltreTous){
         }
         // on applique ce style au bouton maintenant actif
         setButtonStyle(buttonFiltreTous)
-        // Mettez à jour le bouton actif
+        // Mettre à jour le bouton actif
         activeButton = buttonFiltreTous;
     const tousTravaux = allWorks.filter(function(tousTravaux){
     return tousTravaux   
@@ -52,7 +52,7 @@ function showTous(buttonFiltreTous){
     })}
 
 
-buttonFiltreTous(buttonFiltreTous)
+buttonFiltreTous()
    
 
 function buttonFiltresAll (){
@@ -100,7 +100,7 @@ function setButtonStyle(button){
 // style bouton non actif
 function removeButtonStyle(button){
     button.style.backgroundColor = "#FFFEF8"
-    button.style.color = "black" 
+    button.style.color = "#1D6154" 
 }
 
 
