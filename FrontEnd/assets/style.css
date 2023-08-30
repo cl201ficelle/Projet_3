@@ -243,3 +243,24 @@ main{
 	font-family: 'Work Sans';
 	font-size: 0.7em;
 }
+
+#h2modif{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	text-align: center;
+	gap : 5px
+	
+}
+#modifier{
+	padding-top: 8px;	
+	text-decoration : none;
+	color: black
+}
+.fa-pen-to-square{
+	padding-top: 8px;
+}
+
+#h2modif .titreMesProjets{
+	padding-right: 20px;
+}

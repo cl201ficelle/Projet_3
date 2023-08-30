@@ -50,6 +50,7 @@ function recupererInputValue(){
       event.preventDefault();
       verifierChamp(email)
       verifierChamp(password)
+      // récupération des valeurs entrées par utilisateur
     let {userEmailValue, userPasswordValue} = recupererInputValue()
       submit(userEmailValue, userPasswordValue)
       if (localStorage.getItem("token") !==''){
@@ -66,9 +67,11 @@ function recupererInputValue(){
 
   function isConnected(){
   Log.addEventListener('click', function(){
+    // si token, la fonction logout se met en route
     if (localStorage.getItem("token")){
       LogOut()
       console.log("utilisateur deconnecté")
+      // si pas de token, redirection vers connectionpage
     }else{
       window.location.href = "connectionpage.html"
     }
@@ -79,7 +82,7 @@ function recupererInputValue(){
 // regex deja présent par défaut
 function verifierChamp(balise){
   if (balise.value ===""){
-    balise.style.boxShadow = "0px 0px 20px #9e1e1e"
+    balise.style.boxShadow = "0px 0px 8px #9e1e1e"
     
   }
 }
