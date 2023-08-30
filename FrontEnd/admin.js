@@ -48,23 +48,65 @@ h2modif.appendChild(logoModif)
 const modifier = document.createElement("a")
 modifier.innerText = "modifier"
 modifier.id="modifier"
-modifier.href="#"
+modifier.href="#modal"
+modifier.classList="lienModal"
 h2modif.appendChild(modifier)
 }
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   isConnected()
   deconnectionRedirection()
+
+
+
+
+
+
+
+
+let modal = null
+
+
+const openModal = function(e){
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute("href"))
+    target.style.display=null
+    modal = target
+    modal.addEventListener("click", closeModal)
+    modal.querySelector('.Modalclose').addEventListener("click",closeModal)
+    modal.querySelector('.modalConteneur').addEventListener("click",stopPropagation)
+}
+
+const closeModal = function (e){
+  if (modal === null) return
+  e.preventDefault()
+  modal.style.display= "none"
+  modal.querySelector('.Modalclose').removeEventListener("click", closeModal)
+  modal.querySelector('.modalConteneur').removeEventListener("click", stopPropagation)
+  modal=null
+}
+
+const stopPropagation = function(e){
+  e.stopPropagation()
+}
+
+
+document.querySelectorAll(".lienModal").forEach(a=>{
+  a.addEventListener("click", openModal)
+  
+})
+
+window.addEventListener("keydown", function (e){
+  if (e.key === "Escape"){
+    closeModal(e)
+  }
+})
+  
+  
+  
+// let contenuModal = document.querySelector(".modalConteneur") 
+// contenuModal.innerHTML = genererGallery(allWorks)
+  
+  
+  
+  
+  
