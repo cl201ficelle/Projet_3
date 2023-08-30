@@ -286,7 +286,7 @@ main{
 
 .modalConteneur{
 	background-color: white;
-	width: 50%; 
+	width: 40%; 
 	padding: 20px;
 	overflow: auto;
 
@@ -303,9 +303,44 @@ main{
 	border : none
 }
 
-.fa-arrow-left{
+.fa-arrow-left, .fa-xmark{
 	font-size: 1.5em;
 }
-.fa-xmark{
-	font-size: 1.4em;
+
+
+
+/* gallerie modal */
+.modalTitle{
+	font-size: 1.625em;
+	color : black;
+	text-align: center;
+	padding-bottom: 40px;
+}
+
+.modal1 img{
+	
+	height: 103px;
+}
+
+.photoGalleryModal{
+display:grid;
+grid-template-columns: 77px 77px 77px 77px 77px;
+gap : 10px;
+justify-content: center;
+}
+
+.photoGalleryModal a{
+	text-decoration: none;
+	color: black;
+	font-size: 0.75em;
+}
+
+.fa-trash{
+	color: white;
+}
+.photoGalleryModal button{
+	background-color: black;
+	border : none;
+	position: absolute;
+
 }

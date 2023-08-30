@@ -102,11 +102,50 @@ window.addEventListener("keydown", function (e){
 })
   
   
+
+function genererGalleryModal(Works){
+             
+  // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
+ for (let i= 0; i<Works.length; i++){
+     // on récupère la balise div avec classe gallery déjà présente dans html
+    let photoGalleryModal = document.querySelector('.photoGalleryModal')
+     // on crée une balise figure qui contiendra chaque élément work
+     const workElement = document.createElement("figure")
+     // on crée une balise image
+     const imgElement = document.createElement("img")
+    //  creation lien editer
+     const editer = document.createElement("a")
+    //  creation logo trash
+     const trash = document.createElement('i')
+    //  on donne le logo a i
+     trash.classList="fa-solid fa-trash"
+    //  on créé bouton    
+     const buttonTrash = document.createElement("button")
+    //  on met le button trash pour chaque élément work
+     workElement.appendChild(buttonTrash) 
+      //on met le logo trash pour chaque élément button 
+     buttonTrash.appendChild(trash)
+    //  on donne contenu a "éditer"
+     editer.innerText="éditer"
+    //  on donne lien a "éditer"
+     editer.href="#"
+     // on met la source des images, que je connais grâce console.log(allWorks). on utilise l'indice i, comme ca on va obtenir chaque élémént de la liste de l'api.
+     imgElement.src = Works[i].imageUrl
+     // on met les div workElement dans gallery
+     photoGalleryModal.appendChild(workElement)
+     // on met les images dans chaque div workElement
+     workElement.appendChild(imgElement)
+     workElement.appendChild(editer)
+     
+               
+ }
+}
+
+genererGalleryModal(allWorks)
+console.log(allWorks)
   
-// let contenuModal = document.querySelector(".modalConteneur") 
-// contenuModal.innerHTML = genererGallery(allWorks)
-  
-  
-  
+
+
+ 
   
   
