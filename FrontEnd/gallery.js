@@ -46,6 +46,6 @@ function genererGallery(Works){
     
 genererGallery(allWorks)
 
-
+console.table(allWorks)
 
 

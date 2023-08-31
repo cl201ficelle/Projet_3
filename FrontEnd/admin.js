@@ -1,6 +1,7 @@
 
 function LogOut(){
   localStorage.removeItem("token")
+  
   Log.innerText="login"
   // supprime le lien modif
   h2modif.innerHTML='<h2 class="titreMesProjets">Mes Projets</h2>'
@@ -104,6 +105,7 @@ if (e.key === "Escape"){
 let photoGalleryModal = document.querySelector('.photoGalleryModal')  
 
 function genererGalleryModal(Works){
+  photoGalleryModal.innerHTML = ""
            
 // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
 for (let i= 0; i<Works.length; i++){
@@ -124,7 +126,7 @@ for (let i= 0; i<Works.length; i++){
    const buttonTrash = document.createElement("button")
    buttonTrash.classList=("buttonTrash")
   //  donner numéro id au trash qui corresponde au id travaux
-   buttonTrash.id=(i+1)
+  buttonTrash.setAttribute("id", Works[i].id);
   //  on met le button trash pour chaque élément work
    workElement.appendChild(buttonTrash) 
     //on met le logo trash pour chaque élément button 
@@ -146,47 +148,74 @@ for (let i= 0; i<Works.length; i++){
 
 genererGalleryModal(allWorks)
 
-function createButtonAjout(){
-const buttonAjoutPhoto = document.createElement("button")
-buttonAjoutPhoto.classList=("buttonAjoutPhoto")
-buttonAjoutPhoto.innerText="Ajouter une photo"
-const conteneurButtonAjout = document.querySelector(".conteneurButtonAjout")
-conteneurButtonAjout.appendChild(buttonAjoutPhoto)
-}
 
-createButtonAjout()
 
 
 
 function deleteWorkTrash(){
-let buttonTrashList = document.querySelectorAll(".buttonTrash");
-buttonTrashList.forEach(buttonTrash => {
-  buttonTrash.addEventListener("click", function(){ 
-    const idWorkToDelete = buttonTrash.id; // Utilisez le bouton actuel
-    console.log(idWorkToDelete);
-    deleteWork(idWorkToDelete);
+  let buttonTrashList = document.querySelectorAll(".buttonTrash");
+  buttonTrashList.forEach(buttonTrash => {
+    buttonTrash.addEventListener("click", function(){ 
+      const idWorkToDelete = buttonTrash.getAttribute("id"); // Utilisez l'ID du bouton actuel
+      console.log(idWorkToDelete);
+      deleteWork(idWorkToDelete);
+    });
   });
-});
 }
 
-function deleteWork (idWork){
+function deleteWork(idWork){
+  let bearerToken = localStorage.getItem("token")
+  fetch(`http://localhost:5678/api/works/${idWork}`, {
+    method: "DELETE",
+    headers: {
+      accept: "*/*",
+      Authorization: `Bearer ${bearerToken}`
+    }
+  })  
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('erreur');
+    }
+    localStorage.removeItem("data");
+    getNewWorks();
+  })
+  .catch(error => {
+    console.error('problème requête DELETE :', error);
+  });
+}
 
-let bearerToken = localStorage.getItem("token")
-fetch(`http://localhost:5678/api/works/${idWork}`,{
-method :"DELETE",
-headers: {
-  accept: "*/*",
-  Authorization: `Bearer ${bearerToken}`
+function getNewWorks() {
+  fetch("http://localhost:5678/api/works")
+    .then(response => response.json())
+    .then(data => {
+      localStorage.setItem("mydata3", JSON.stringify(data));
+      let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
+      gallery.innerHTML=""
+      genererGallery(getnewWorks);
+      genererGalleryModal(getnewWorks);
+    })
+    .catch(error => {
+      console.error('problème requête GET :', error);
+    });
 }
-})  
-.then(response => {
-if (!response.ok) {
-    throw new Error('erreur');
-}
-console.log('supression ok');
-})
-.catch(error => {
-console.error('problème requête DELETE :', error);
-});
 
-}
+
+
+
+
+
+
+
+
+
+
+
+function createButtonAjout(){
+  const buttonAjoutPhoto = document.createElement("button")
+  buttonAjoutPhoto.classList=("buttonAjoutPhoto")
+  buttonAjoutPhoto.innerText="Ajouter une photo"
+  const conteneurButtonAjout = document.querySelector(".conteneurButtonAjout")
+  conteneurButtonAjout.appendChild(buttonAjoutPhoto)
+  }
+  
+  createButtonAjout()
