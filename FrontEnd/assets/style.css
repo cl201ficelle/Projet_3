@@ -376,3 +376,19 @@ justify-content: center;
 #Log{
 	cursor: pointer;
 }
+
+#BarreNoir{
+	
+	background-color: black;
+	font-size: 14px;
+	text-align: center;
+	color: white;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	width : 100vw;
+	margin-left : calc(-1 * ((100vw - 100%) / 2));
+}
+
+.fa-pen-to-square{
+	padding-right: 18px;
+}

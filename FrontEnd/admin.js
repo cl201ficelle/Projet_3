@@ -1,7 +1,8 @@
 
 function LogOut(){
   localStorage.removeItem("token")
-  
+  const barreNoire = document.getElementById("BarreNoir")
+  barreNoire.style.display="none"
   Log.innerText="login"
   // supprime le lien modif
   h2modif.innerHTML='<h2 class="titreMesProjets">Mes Projets</h2>'
@@ -34,6 +35,8 @@ if (localStorage.getItem('token')) {
   Log.innerHTML='logout'
   creationLienModif()
   divFiltres.innerHTML=''
+  const barreNoire = document.getElementById("BarreNoir")
+  barreNoire.style.display=null
   
 }
 }
