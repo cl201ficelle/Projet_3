@@ -39,7 +39,8 @@ function genererGallery(Works){
         workElement.appendChild(imgElement)
         // on met chaque figcaption dans chaque div workElement
         workElement.appendChild(figCaption)
-                    
+        
+
     }
 }
     

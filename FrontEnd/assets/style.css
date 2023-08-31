@@ -286,7 +286,7 @@ main{
 
 .modalConteneur{
 	background-color: white;
-	width: 40%; 
+	width: 630px; 
 	padding: 20px;
 	overflow: auto;
 
@@ -338,9 +338,41 @@ justify-content: center;
 .fa-trash{
 	color: white;
 }
-.photoGalleryModal button{
+.photoGalleryModal .buttonTrash{
 	background-color: black;
 	border : none;
-	position: absolute;
+	position: relative;
+    left: 50px;
+    top: 20px;
 
+}
+
+.conteneurButtonAjout .buttonAjoutPhoto{
+	
+	font-family: 'Syne';
+	background-color: #1D6154;
+	padding: 10px 15px;
+	font-size: 1em;
+	font-weight: 700;
+	border-radius: 20px;
+	border-style: none;
+	border: #1D6154 1px solid;
+	color: white;
+}
+
+.conteneurButtonAjout{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+
+.modal1 hr{
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-inline-start: 80px;
+	margin-inline-end: 80px;
+}
+
+#Log{
+	cursor: pointer;
 }
