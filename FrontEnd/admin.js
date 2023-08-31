@@ -153,30 +153,42 @@ genererGalleryModal(allWorks)
 
 
 function deleteWorkTrash(){
+  // recupère les boutons trash
   let buttonTrashList = document.querySelectorAll(".buttonTrash");
+  // pour chaque bouton trash un eventlistener
   buttonTrashList.forEach(buttonTrash => {
     buttonTrash.addEventListener("click", function(){ 
-      const idWorkToDelete = buttonTrash.getAttribute("id"); // Utilisez l'ID du bouton actuel
+      // id du work a supprimer = a id bouton trash cliqué
+      const idWorkToDelete = buttonTrash.getAttribute("id");
+
       console.log(idWorkToDelete);
+      // supprimer le work selon quel bouton trash cliqué
       deleteWork(idWorkToDelete);
     });
   });
 }
 
 function deleteWork(idWork){
-  let bearerToken = localStorage.getItem("token")
+  // recupère le token
+  let token = localStorage.getItem("token")
+  // recupère work selon son id swagger
   fetch(`http://localhost:5678/api/works/${idWork}`, {
+    // méthode suppression
     method: "DELETE",
     headers: {
+      // info dans swagger
       accept: "*/*",
-      Authorization: `Bearer ${bearerToken}`
+      // voir si on est bien authetifier pour faire l'action
+      Authorization: `Bearer ${token}`
     }
   })  
   .then(response => {
     if (!response.ok) {
       throw new Error('erreur');
     }
-    localStorage.removeItem("data");
+    // supression des travaux localstorage pour refaire la gallerie
+    localStorage.removeItem("mydata");
+    // fonction qui refait la gallerie sans les éléments supprimés: gallery à jour
     getNewWorks();
   })
   .catch(error => {
@@ -184,13 +196,16 @@ function deleteWork(idWork){
   });
 }
 
+
 function getNewWorks() {
   fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .then(data => {
+      // récupère work a jour, sans élément supprimé
       localStorage.setItem("mydata3", JSON.stringify(data));
       let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
-      gallery.innerHTML=""
+      // mettre la gallery à 0 avant de refaire la gallery pour ne pas qu'il y est de doublon
+      deleteGalleryWorks()
       genererGallery(getnewWorks);
       genererGalleryModal(getnewWorks);
     })

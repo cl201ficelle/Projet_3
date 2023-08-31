@@ -40,7 +40,7 @@ function genererGallery(Works){
         // on met chaque figcaption dans chaque div workElement
         workElement.appendChild(figCaption)
         
-
+        
     }
 }
     
