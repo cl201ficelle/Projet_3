@@ -68,13 +68,20 @@ deconnectionRedirection()
 
 
 let modal = null
+const flecheRetour = document.querySelector(".fa-arrow-left")
+const modal1 = document.querySelector(".modal1")
+const modal2 =document.querySelector(".modal2")
 
 
 const openModal = function(e){
   e.preventDefault()
+  
+  flecheRetour.style.color="white"
   const target = document.querySelector(e.target.getAttribute("href"))
   target.style.display=null
   modal = target
+  
+  modal2.style.display="none"
   modal.addEventListener("click", closeModal)
   modal.querySelector('.Modalclose').addEventListener("click",closeModal)
   modal.querySelector('.modalConteneur').addEventListener("click",stopPropagation)
@@ -223,11 +230,6 @@ function getNewWorks() {
 
 
 
-
-
-
-
-
 function createButtonAjout(){
   const buttonAjoutPhoto = document.createElement("button")
   buttonAjoutPhoto.classList=("buttonAjoutPhoto")
@@ -235,5 +237,35 @@ function createButtonAjout(){
   const conteneurButtonAjout = document.querySelector(".conteneurButtonAjout")
   conteneurButtonAjout.appendChild(buttonAjoutPhoto)
   }
+
   
-  createButtonAjout()
+
+function ajoutPhoto(){ 
+createButtonAjout()
+
+  const buttonAjoutPhoto = document.querySelector(".buttonAjoutPhoto").addEventListener("click", function(){
+  modal1.style.display="none"
+  modal2.style.display=null
+  flecheRetour.style.color="black"
+} )
+} 
+
+
+flecheRetour.addEventListener("click", function (){
+  modal1.style.display=null
+  modal2.style.display="none"
+  flecheRetour.style.color="white"
+})
+
+
+ajoutPhoto()
+
+function createButtonValider(){
+  const buttonValider = document.createElement("button")
+  buttonValider.classList=("buttonValider")
+  buttonValider.innerText="Valider"
+  const conteneurButtonValider = document.querySelector(".conteneurButtonValider")
+  conteneurButtonValider.appendChild(buttonValider)
+  }
+
+  createButtonValider()

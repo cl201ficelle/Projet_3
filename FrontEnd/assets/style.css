@@ -347,7 +347,7 @@ justify-content: center;
 
 }
 
-.conteneurButtonAjout .buttonAjoutPhoto{
+.conteneurButtonAjout .buttonAjoutPhoto, .conteneurButtonValider .buttonValider{
 	
 	font-family: 'Syne';
 	background-color: #1D6154;
@@ -358,9 +358,10 @@ justify-content: center;
 	border-style: none;
 	border: #1D6154 1px solid;
 	color: white;
+	width: 237px;
 }
 
-.conteneurButtonAjout{
+.conteneurButtonAjout, .conteneurButtonValider{
 	display: flex;
 	justify-content: center;
 	padding: 20px;
