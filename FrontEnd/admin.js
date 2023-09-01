@@ -272,3 +272,26 @@ function createButtonValider(){
   createButtonValider()
 
 
+ const categorie_select = document.getElementById("categorie_select")
+ console.log(categorie_select)
+
+ for (let i=0; i<allCategories.length; i++){
+  const optionCategorie = document.createElement("option")
+  optionCategorie.innerText = allCategories[i].name
+  categorie_select.appendChild(optionCategorie)
+  }
+
+
+ function buttonFiltresAll (){
+  // //    boucle for pour récupérer toutes les catégories i
+  // // mise en place du compteur : initialisation de i, pour i < longueur catégories, on incrémente i
+  for (let i=0; i<allCategories.length; i++){
+      // création bouton autant de bouton qu'il y a de catégorie dans la section catégories de l'api
+      const buttonFiltre = document.createElement("button") 
+      // je donne au bouton le nom des catégories
+      buttonFiltre.innerText = allCategories[i].name
+      // je mets ces boutons dans la div que je veux
+      divFiltres.appendChild(buttonFiltre)
+      // console.log(buttonFiltre.textContent)
+      showFiltered(buttonFiltre)
+  }}
