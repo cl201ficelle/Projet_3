@@ -58,9 +58,25 @@
 </div>
 <div class="modal2">
 		<h3 class="modalTitle">Ajout Photo</h3>
-		<div class="photoGalleryModal"></div>
-		<hr>
-		<div class="conteneurButtonValider"></div>
+		<form id="formulaireAjout">
+			<div id="ajout_photo_cadre_bleu">
+				<i class="fa-regular fa-image"></i>
+				<label for="ajout_photo" id="ajout_photos">+ Ajouter photo</label>
+				<input type="file" id="ajout_photo" title="image du projet" accept="image/png, image/jpeg" hidden/>
+				<p>jpg, png : 4mo max</p>
+			</div>
+			<div id="titre_categorie">	
+			<label for="TitreForm" id="TitreForms">Titre</label>
+            <input type="text" name="TitreForm" id="TitreForm">
+
+			<label for="categorie_select" id="categorie_selects">Catégorie</label>
+			<select id="categorie_select">Catégorie</select>
+			<hr>
+		</div>
+			
+			<div class="conteneurButtonValider"></div>
+		</form>
+		
 </div>
 	</div>
 	
@@ -68,17 +84,6 @@
 
 
 </aside>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -75,7 +75,7 @@ const modal2 =document.querySelector(".modal2")
 
 const openModal = function(e){
   e.preventDefault()
-  
+  modal1.style.display=null
   flecheRetour.style.color="white"
   const target = document.querySelector(e.target.getAttribute("href"))
   target.style.display=null
@@ -261,7 +261,7 @@ flecheRetour.addEventListener("click", function (){
 ajoutPhoto()
 
 function createButtonValider(){
-  const buttonValider = document.createElement("button")
+  const buttonValider = document.createElement("submit")
   buttonValider.classList=("buttonValider")
   buttonValider.innerText="Valider"
   const conteneurButtonValider = document.querySelector(".conteneurButtonValider")
@@ -269,3 +269,5 @@ function createButtonValider(){
   }
 
   createButtonValider()
+
+

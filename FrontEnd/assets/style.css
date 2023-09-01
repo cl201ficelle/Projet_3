@@ -188,13 +188,13 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input, #formulaire_connection input {
+#contact input, #formulaire_connection input, #formulaireAjout input, #formulaireAjout select{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #formulaire_connection label {
+#contact label, #formulaire_connection label, #formulaireAjout #categorie_selects, #formulaireAjout #TitreForms{
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -263,6 +263,7 @@ main{
 }
 .fa-pen-to-square{
 	padding-top: 8px;
+	font-size: 16px;
 }
 
 #h2modif .titreMesProjets{
@@ -359,6 +360,7 @@ justify-content: center;
 	border: #1D6154 1px solid;
 	color: white;
 	width: 237px;
+	text-align: center;
 }
 
 .conteneurButtonAjout, .conteneurButtonValider{
@@ -372,6 +374,14 @@ justify-content: center;
 	margin-bottom: 20px;
 	margin-inline-start: 80px;
 	margin-inline-end: 80px;
+	color: #B3B3B3;
+}
+#titre_categorie hr{
+	margin-top: 40px;
+	margin-bottom: 20px;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	color: #B3B3B3;
 }
 
 #Log{
@@ -390,6 +400,63 @@ justify-content: center;
 	margin-left : calc(-1 * ((100vw - 100%) / 2));
 }
 
-.fa-pen-to-square{
-	padding-right: 18px;
+#BarreNoir .fa-pen-to-square{
+	padding-right: 10px;
+}
+
+
+/* formulaire ajout */
+#formulaireAjout{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0;
+	text-align: left;
+}
+/* #formulaireAjout label{
+	text-align: left;
+
+} */
+
+#formulaireAjout select, #formulaireAjout input{
+	width: 420px;
+}
+
+
+
+#ajout_photo_cadre_bleu{
+	width: 420px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 5px;
+	background-color: #E8F1F6;
+	height: 169px;
+	justify-content: center;
+}
+
+#ajout_photo_cadre_bleu label{
+	background-color:#CBD6DC;
+	color:#1D6154;
+	/* width: 173px; */
+	height: 36px;
+	border-radius: 50px;
+	margin-left: 120px;
+	margin-right: 120px;
+	padding-top: 10px;
+	font-size: 16px;
+}
+
+#ajout_photo_cadre_bleu .fa-image{
+	font-size: 76px;
+	color: #CBD6DC;
+}
+
+#ajout_photo_cadre_bleu p{
+	font-size: 10px;
+}
+
+#titre_categorie{
+	display: flex;	
+	flex-direction: column;
 }
