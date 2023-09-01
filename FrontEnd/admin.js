@@ -261,9 +261,10 @@ flecheRetour.addEventListener("click", function (){
 ajoutPhoto()
 
 function createButtonValider(){
-  const buttonValider = document.createElement("submit")
+  const buttonValider = document.createElement("button")
   buttonValider.classList=("buttonValider")
   buttonValider.innerText="Valider"
+  buttonValider.type=("submit")
   const conteneurButtonValider = document.querySelector(".conteneurButtonValider")
   conteneurButtonValider.appendChild(buttonValider)
   }
