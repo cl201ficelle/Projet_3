@@ -274,24 +274,100 @@ function createButtonValider(){
 
  const categorie_select = document.getElementById("categorie_select")
  console.log(categorie_select)
+function createOptionSelected(){
+  const defaultOption = document.createElement("option");
+  defaultOption.innerText = "Choisir une catégorie";
+  defaultOption.value = ""; // Vous pouvez définir une valeur vide ou une valeur unique si nécessaire
+  defaultOption.selected = true; // Sélectionnez automatiquement cette option par défaut
+
+  // Ajoutez cette option par défaut au menu déroulant
+  categorie_select.appendChild(defaultOption); 
 
  for (let i=0; i<allCategories.length; i++){
   const optionCategorie = document.createElement("option")
   optionCategorie.innerText = allCategories[i].name
   categorie_select.appendChild(optionCategorie)
+  }}
+
+  createOptionSelected()
+
+
+
+  // selection élement dont on veut avoir l'aperçu et la la 
+const fileInput = document.getElementById("ajout_photo");
+const preview = document.getElementById("apercu");
+
+// Écoutez les changements dans le champ de fichier
+fileInput.addEventListener("change", function () {
+  
+    // Vérifiez s'il y a un fichier sélectionné
+    if (fileInput.files && fileInput.files[0]) {
+      // supprimer les éléments qui vont être remplacés par l'aperçu
+      const logoimage = document.querySelector(".fa-image")
+      logoimage.style.display="none"
+      const pAjout = document.querySelector(".pAjout")
+      pAjout.style.display="none"
+      const ajout_photos = document.getElementById("ajout_photos")
+      ajout_photos.style.display="none"
+        //  objet filereader pour lire contenu fichier
+        const reader = new FileReader();
+
+        // fonction de rappel pour exécuter lorsque lecture terminée
+        reader.onload = function (e) {   
+            // creation element img pour afficher l'aperçu
+            const image = document.createElement("img");
+            // source de img données lues depuis le fichier
+            image.src = e.target.result;
+            image.classList.add("aperçu-image");         
+            preview.innerHTML = "";
+            // Ajoute élément img à élément d'aperçu
+            preview.appendChild(image);
+        }
+        // Lire contenu fichier en tant que données URL (base64)
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});
+
+
+
+const buttonValider = document.querySelector(".buttonValider")
+console.log(buttonValider)
+
+function recupererInputValueAjout(){
+  let userTitleInput = document.getElementById("TitreForm");
+  let userTitleValue = userTitleInput.value;
+    
+  let userCategorieInput = document.getElementById("categorie_select");
+  let userCategorieValue = userCategorieInput.value;
+  return { userTitleValue, userCategorieValue }
   }
 
+let formulaireAjout = document.getElementById("formulaireAjout")
 
- function buttonFiltresAll (){
-  // //    boucle for pour récupérer toutes les catégories i
-  // // mise en place du compteur : initialisation de i, pour i < longueur catégories, on incrémente i
-  for (let i=0; i<allCategories.length; i++){
-      // création bouton autant de bouton qu'il y a de catégorie dans la section catégories de l'api
-      const buttonFiltre = document.createElement("button") 
-      // je donne au bouton le nom des catégories
-      buttonFiltre.innerText = allCategories[i].name
-      // je mets ces boutons dans la div que je veux
-      divFiltres.appendChild(buttonFiltre)
-      // console.log(buttonFiltre.textContent)
-      showFiltered(buttonFiltre)
-  }}
+formulaireAjout.addEventListener("submit", function (event) {
+  event.preventDefault();
+  verifierChamp(TitreForm)
+  verifierChamp(categorie_select)
+  verifierChampFichier(document.getElementById("ajout_photo"));
+  // récupération des valeurs entrées par utilisateur
+// let {userTitleValue, userCategorieValue } = recupererInputValueAjout()
+//   submit(userTitleValue, userCategorieValue)
+})
+
+// verifier champ non vide, sinon boxshadow rouge
+function verifierChamp(balise){
+  if (balise.value ===""){
+    balise.style.boxShadow = "0px 0px 8px #9e1e1e"
+  }else{
+    balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
+  }
+
+}
+
+// vérifier champ fichier non vide, sinon message alerte
+function verifierChampFichier(balise) {
+  const fichierSelectionne = balise.files[0]; // Obtenez le fichier sélectionné
+  if (!fichierSelectionne) {
+    alert("Veuillez sélectionner un fichier.");
+  } 
+}

@@ -83,7 +83,8 @@ function recupererInputValue(){
 function verifierChamp(balise){
   if (balise.value ===""){
     balise.style.boxShadow = "0px 0px 8px #9e1e1e"
-    
+  }else{
+    balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
   }
 }
   
