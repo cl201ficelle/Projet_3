@@ -397,10 +397,10 @@ formulaireAjout.addEventListener("submit", function(event) {
       image
   } = recupererInputValueAjout()
   event.preventDefault();
-  // verifierChamp(TitreForm)
-  // verifierChamp(categorie_select)
-  // verifierChampFichier(document.getElementById("ajout_photo"))
-  formData.append("ajout_photo", image)
+  verifierChamp(TitreForm)
+  verifierChamp(categorie_select)
+  verifierChampFichier(document.getElementById("ajout_photo"))
+  formData.append("image", image)
   console.log(image)
   formData.append("title", title)
   // console.log(title)
