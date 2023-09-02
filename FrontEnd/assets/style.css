@@ -1,21 +1,5 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, option {
+/* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, option {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -24,8 +8,7 @@ time, mark, audio, video, option {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -37,8 +20,7 @@ ol, ul {
 blockquote, q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: '';
 	content: none;
 }
@@ -56,12 +38,11 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0 
 }
 section {
-	margin: 50px 0
+	margin: 50px 0 
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -69,27 +50,23 @@ h1{
 	font-size: 22px;
 	font-weight: 800;
 	color: #B1663C;
-	gap : 5px
+	gap : 5px 
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-
 }
-
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154 
 }
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -99,7 +76,6 @@ li a{
 	text-decoration: none;
 	color: black;
 }
-
 li:hover {
 	color: #B1663C;
 }
@@ -109,21 +85,19 @@ li:hover {
 	margin-bottom: 80px;
 }
 #introduction figure {
-	flex: 1
+	flex: 1 
 }
 #introduction img {
 	display: block;
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
-	flex: 1
+	flex: 1 
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
@@ -131,15 +105,13 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-/*  *******************************************************FILTRE*********************************** */
+/* *******************************************************FILTRE*********************************** */
 .divFiltres{
 	display: flex;
 	justify-content: center;
 	gap: 15px;
 	margin-bottom: 50px;
-	
 }
-
 .divFiltres button{
 	font-family: 'Syne';
 	background-color: white;
@@ -151,8 +123,6 @@ li:hover {
 	border: #1D6154 1px solid;
 	color: #1D6154;
 }
-
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -160,23 +130,19 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
-
 }
 #contact #formulaire_connection {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #formulaire_connection{
 	width: 35%;
-margin: auto;
+	margin: auto;
 }
-
 #contact > * {
 	text-align: center;
-
 }
 #contact h2{
 	margin-bottom: 20px;
@@ -187,7 +153,6 @@ margin: auto;
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input, #formulaire_connection input, #formulaireAjout input{
 	height: 50px;
 	font-size: 1.2em;
@@ -209,7 +174,6 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -220,13 +184,11 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em 
 }
-
 .mdpoublie {
 	text-align: center;
 	color: black;
@@ -238,9 +200,8 @@ html{
 	background-color: #FFFEF8;
 	;
 }
-html,
-body {
-	height: 100%
+html, body {
+	height: 100% 
 }
 body{
 	display: flex;
@@ -253,34 +214,31 @@ main{
 	font-family: 'Work Sans';
 	font-size: 0.7em;
 }
-
 #h2modif{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	text-align: center;
-	gap : 5px; 
+	gap : 5px;
 	margin-top: 100px;
 	margin-bottom: 20px;
 }
-
 #modifier{
-	padding-top: 8px;	
+	padding-top: 8px;
 	text-decoration : none;
-	color: black
+	color: black 
 }
 .fa-pen-to-square{
 	padding-top: 8px;
 	font-size: 16px;
 }
-
 #h2modif .titreMesProjets{
 	padding-right: 20px;
 }
-
-
 /* Modale */
-*{box-sizing: border-box;}
+*{
+   box-sizing: border-box;
+}
 .modal{
 	display: flex;
 	align-items: center;
@@ -292,32 +250,24 @@ main{
 	height: 100%;
 	background: rgba( 0, 0, 0, 0.8) ;
 }
-
 .modalConteneur{
 	background-color: white;
-	width: 630px; 
+	width: 630px;
 	padding: 20px;
 	overflow: auto;
-
-
 }
 /* bouton modal */
 .button-close {
 	display: flex;
 	justify-content: space-between;
 }
-
 .button-close .Modalclose{
 	background-color: white;
-	border : none
+	border : none 
 }
-
 .fa-arrow-left, .fa-xmark{
 	font-size: 1.5em;
 }
-
-
-
 /* gallerie modal */
 .modalTitle{
 	font-size: 1.625em;
@@ -325,25 +275,20 @@ main{
 	text-align: center;
 	padding-bottom: 40px;
 }
-
 .modal1 img{
-	
 	height: 103px;
 }
-
 .photoGalleryModal{
-display:grid;
-grid-template-columns: 77px 77px 77px 77px 77px;
-gap : 10px;
-justify-content: center;
+	display:grid;
+	grid-template-columns: 77px 77px 77px 77px 77px;
+	gap : 10px;
+	justify-content: center;
 }
-
 .photoGalleryModal a{
 	text-decoration: none;
 	color: black;
 	font-size: 0.75em;
 }
-
 .fa-trash-can{
 	color: white;
 }
@@ -351,13 +296,10 @@ justify-content: center;
 	background-color: black;
 	border : none;
 	position: relative;
-    left: 50px;
-    top: 20px;
-
+	left: 50px;
+	top: 20px;
 }
-
 .conteneurButtonAjout .buttonAjoutPhoto, .conteneurButtonValider .buttonValider{
-	
 	font-family: 'Syne';
 	background-color: #1D6154;
 	padding: 10px 15px;
@@ -370,13 +312,11 @@ justify-content: center;
 	width: 237px;
 	text-align: center;
 }
-
 .conteneurButtonAjout, .conteneurButtonValider{
 	display: flex;
 	justify-content: center;
 	padding: 20px;
 }
-
 .modal1 hr{
 	margin-top: 30px;
 	margin-bottom: 20px;
@@ -391,15 +331,12 @@ justify-content: center;
 	margin-inline-end: 0px;
 	color: #B3B3B3;
 }
-
 #Log{
 	cursor: pointer;
 }
-
 #BarreNoir{
-	
 	background-color: black;
-	font-size: 14px;
+	font-size: 16px;
 	text-align: center;
 	color: white;
 	padding-top: 15px;
@@ -407,12 +344,9 @@ justify-content: center;
 	width : 100vw;
 	margin-left : calc(-1 * ((100vw - 100%) / 2));
 }
-
 #BarreNoir .fa-pen-to-square{
 	padding-right: 10px;
 }
-
-
 /* formulaire ajout */
 #formulaireAjout{
 	display: flex;
@@ -421,17 +355,10 @@ justify-content: center;
 	gap: 0;
 	text-align: left;
 }
-/* #formulaireAjout label{
-	text-align: left;
-
-} */
 
 #formulaireAjout select, #formulaireAjout input{
 	width: 420px;
 }
-
-
-
 #ajout_photo_cadre_bleu{
 	width: 420px;
 	display: flex;
@@ -442,33 +369,27 @@ justify-content: center;
 	height: 169px;
 	justify-content: center;
 }
-
 #ajout_photo_cadre_bleu label{
 	background-color:#CBD6DC;
 	color:#1D6154;
-	/* width: 173px; */
-	height: 36px;
+   	height: 36px;
 	border-radius: 50px;
 	margin-left: 120px;
 	margin-right: 120px;
 	padding-top: 10px;
 	font-size: 16px;
 }
-
 #ajout_photo_cadre_bleu .fa-image{
 	font-size: 76px;
 	color: #CBD6DC;
 }
-
 #ajout_photo_cadre_bleu p{
 	font-size: 10px;
 }
-
 #titre_categorie{
-	display: flex;	
+	display: flex;
 	flex-direction: column;
 }
-
 #apercu .aperçu-image{
 	width: 125px;
 }

@@ -1,26 +1,26 @@
 // effacer contenu gallery
-function deleteGalleryWorks(){
+function deleteGalleryWorks() {
     let gallery = document.querySelector(".gallery")
     gallery.innerHTML = ''
-    }
-    deleteGalleryWorks()
-    
-async function getAllWorks (){
-        let response = await fetch ("http://localhost:5678/api/works")
-        let allWorks = await response.json()
-        // mettre dans local storage 
-        localStorage.setItem("mydata", JSON.stringify(allWorks))   
+}
+deleteGalleryWorks()
+
+async function getAllWorks() {
+    let response = await fetch("http://localhost:5678/api/works")
+    let allWorks = await response.json()
+    // mettre dans local storage 
+    localStorage.setItem("mydata", JSON.stringify(allWorks))
 }
 
 getAllWorks()
 
 let allWorks = JSON.parse(localStorage.getItem("mydata"))
-    
-    
-function genererGallery(Works){
-             
-     // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
-    for (let i= 0; i<Works.length; i++){
+
+
+function genererGallery(Works) {
+
+    // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
+    for (let i = 0; i < Works.length; i++) {
         // on récupère la balise div avec classe gallery déjà présente dans html
         let gallery = document.querySelector(".gallery")
         // on crée une balise figure qui contiendra chaque élément work
@@ -39,13 +39,9 @@ function genererGallery(Works){
         workElement.appendChild(imgElement)
         // on met chaque figcaption dans chaque div workElement
         workElement.appendChild(figCaption)
-        
-        
     }
 }
-    
+
 genererGallery(allWorks)
 
 console.table(allWorks)
-
-

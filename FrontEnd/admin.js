@@ -7,7 +7,6 @@ function LogOut() {
   h2modif.innerHTML = '<h2 class="titreMesProjets">Mes Projets</h2>'
   buttonFiltreTous()
   buttonFiltresAll()
-
 }
 
 
@@ -18,7 +17,6 @@ function deconnectionRedirection() {
   Log.addEventListener('click', function() {
       if (localStorage.getItem("token")) {
           LogOut()
-
           console.log("utilisateur deconnecté")
       } else {
           Log.innerHTML = 'login'
@@ -35,7 +33,6 @@ function isConnected() {
       divFiltres.innerHTML = ''
       const barreNoire = document.getElementById("BarreNoir")
       barreNoire.style.display = null
-
   }
 }
 
@@ -77,7 +74,6 @@ const openModal = function(e) {
   const target = document.querySelector(e.target.getAttribute("href"))
   target.style.display = null
   modal = target
-
   modal2.style.display = "none"
   modal.addEventListener("click", closeModal)
   modal.querySelector('.Modalclose').addEventListener("click", closeModal)
@@ -100,7 +96,6 @@ const stopPropagation = function(e) {
 
 document.querySelectorAll(".lienModal").forEach(a => {
   a.addEventListener("click", openModal)
-
 })
 
 window.addEventListener("keydown", function(e) {
@@ -116,8 +111,6 @@ function genererGalleryModal(Works) {
 
   // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
   for (let i = 0; i < Works.length; i++) {
-      // on récupère la balise div avec classe gallery déjà présente dans html
-
       // on crée une balise figure qui contiendra chaque élément work
       const workElement = document.createElement("figure")
       // on crée une balise image
@@ -149,15 +142,11 @@ function genererGalleryModal(Works) {
       // on met les images dans chaque div workElement
       workElement.appendChild(imgElement)
       workElement.appendChild(editer)
-
   }
   deleteWorkTrash()
 }
 
 genererGalleryModal(allWorks)
-
-
-
 
 function deleteWorkTrash() {
   // recupère les boutons trash
@@ -167,7 +156,6 @@ function deleteWorkTrash() {
       buttonTrash.addEventListener("click", function() {
           // id du work a supprimer = a id bouton trash cliqué
           const idWorkToDelete = buttonTrash.getAttribute("id");
-
           console.log(idWorkToDelete);
           // supprimer le work selon quel bouton trash cliqué
           deleteWork(idWorkToDelete);
@@ -176,8 +164,6 @@ function deleteWorkTrash() {
 }
 
 function deleteWork(idWork) {
-  // recupère le token
-
   // recupère work selon son id swagger
   fetch(`http://localhost:5678/api/works/${idWork}`, {
           // méthode suppression
@@ -221,9 +207,6 @@ function getNewWorks() {
       });
 }
 
-
-
-
 function createButtonAjout() {
   const buttonAjoutPhoto = document.createElement("button")
   buttonAjoutPhoto.classList = ("buttonAjoutPhoto")
@@ -232,11 +215,8 @@ function createButtonAjout() {
   conteneurButtonAjout.appendChild(buttonAjoutPhoto)
 }
 
-
-
 function ajoutPhoto() {
   createButtonAjout()
-
   const buttonAjoutPhoto = document.querySelector(".buttonAjoutPhoto").addEventListener("click", function() {
       modal1.style.display = "none"
       modal2.style.display = null
@@ -244,13 +224,11 @@ function ajoutPhoto() {
   })
 }
 
-
 flecheRetour.addEventListener("click", function() {
   modal1.style.display = null
   modal2.style.display = "none"
   flecheRetour.style.color = "white"
 })
-
 
 ajoutPhoto()
 
@@ -265,16 +243,14 @@ function createButtonValider() {
 
 createButtonValider()
 
-
 const categorie_select = document.getElementById("categorie_select")
 console.log(categorie_select)
 
 function createOptionSelected() {
   const defaultOption = document.createElement("option");
   defaultOption.innerText = "Choisir une catégorie";
-  defaultOption.value = ""; // Vous pouvez définir une valeur vide ou une valeur unique si nécessaire
-  defaultOption.selected = true; // Sélectionnez automatiquement cette option par défaut
-
+  defaultOption.value = ""
+  defaultOption.selected = true; // selectionne automatiquement cette option par défaut
   // Ajoutez cette option par défaut au menu déroulant
   categorie_select.appendChild(defaultOption);
 
@@ -309,7 +285,6 @@ fileInput.addEventListener("change", function() {
       ajout_photos.style.display = "none"
       //  objet filereader pour lire contenu fichier
       reader = new FileReader();
-
       // fonction de rappel pour exécuter lorsque lecture terminée
       reader.onload = function(e) {
           // creation element img pour afficher l'aperçu
@@ -329,12 +304,8 @@ fileInput.addEventListener("change", function() {
 
 
 const buttonValider = document.querySelector(".buttonValider")
-console.log(buttonValider)
-
-
 
 let formulaireAjout = document.getElementById("formulaireAjout")
-
 
 
 // verifier champ non vide, sinon boxshadow rouge
@@ -344,7 +315,6 @@ function verifierChamp(balise) {
   } else {
       balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
   }
-
 }
 
 // vérifier champ fichier non vide, sinon message alerte
@@ -354,9 +324,9 @@ function verifierChampFichier(balise) {
       alert("Veuillez sélectionner un fichier.");
   }
 }
-let userTitleInput = document.getElementById("TitreForm");
+let userTitleInput = document.getElementById("TitreForm")
 let userCategorieInput = document.getElementById("categorie_select")
-let userImageInput = document.getElementById("ajout_photo");
+let userImageInput = document.getElementById("ajout_photo")
 
 
 
@@ -365,28 +335,13 @@ function recupererInputValueAjout() {
   let title = userTitleInput.value;
   const selectedOption = userCategorieInput.options[userCategorieInput.selectedIndex];
   let category = parseInt(selectedOption.id, 10);
-
-
-
-
   let image = userImageInput.files[0]
-
-
-
-
-
-
-
-
-  
   return {
       title,
       category,
       image
   }
 }
-
-
 
 
 formulaireAjout.addEventListener("submit", function(event) {
@@ -403,21 +358,15 @@ formulaireAjout.addEventListener("submit", function(event) {
   formData.append("image", image)
   console.log(image)
   formData.append("title", title)
-  // console.log(title)
   formData.append("category", category)
-  // console.log(category)
-  // console.log(typeof title)
-  // console.log(typeof category)
 
   fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
          'accept': 'application/json',
           Authorization: `Bearer ${token}`,
-
       },
       body: formData
-
   })
   .then((res)=>{
     if (res.ok){

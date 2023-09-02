@@ -1,92 +1,99 @@
 // récupération de ce que l'user va écrire dans input
-function recupererInputValue(){
+function recupererInputValue() {
   let userEmailInput = document.getElementById("email");
   let userEmailValue = userEmailInput.value;
-    
+
   let userPasswordInput = document.getElementById("password");
   let userPasswordValue = userPasswordInput.value;
-  return { userEmailValue, userPasswordValue }
+  return {
+      userEmailValue,
+      userPasswordValue
   }
-  
-  // fonction qui va POST les values des inputs
-  function submit(username, password) {
-    // charge utile body swagger
-    let params = {
-    email: username,
-    password: password
-    }
-    
-    fetch("http://localhost:5678/api/users/login", {
-    method: "POST",
-    // header swagger
-    headers: {
-        "Content-Type": "application/json"
-      },
-        body: JSON.stringify(params)
-    })
+}
+
+// fonction qui va POST les values des inputs
+function submit(username, password) {
+  // charge utile body swagger
+  let params = {
+      email: username,
+      password: password
+  }
+
+  fetch("http://localhost:5678/api/users/login", {
+          method: "POST",
+          // header swagger
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(params)
+      })
       .then(res => res.json())
-      .then(data=> {
-  // s'il y a un token : c'est que la combinaison mdp email est bonne, donc connexion réussi et on stock le token dans le local storage
-        if (data.token) {
-            alert("Connexion réussie");
-            localStorage.setItem("token", data.token);
-            // et login devient logout
-            Log.innerText="logout"
-        //   redirection accueil
-            window.location.href = 'index.html'; 
-            
-        } else {
-          throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe, veuillez réessayer"); 
-        }
+      .then(data => {
+          // s'il y a un token : c'est que la combinaison mdp email est bonne, donc connexion réussi et on stock le token dans le local storage
+          if (data.token) {
+              alert("Connexion réussie");
+              localStorage.setItem("token", data.token);
+              // et login devient logout
+              Log.innerText = "logout"
+              //   redirection accueil
+              window.location.href = 'index.html';
+
+          } else {
+              throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe, veuillez réessayer");
+          }
       })
-      .catch((error)=> {
-         alert(error.message); 
+      .catch((error) => {
+          alert(error.message);
       })
-  }
-  
-  function login(){
-    // pour ne pas que la page se rafraichit au submit
-  document.getElementById("login").addEventListener("submit", function (event) {
+}
+
+function login() {
+  // pour ne pas que la page se rafraichit au submit
+  document.getElementById("login").addEventListener("submit", function(event) {
       event.preventDefault();
       verifierChamp(email)
       verifierChamp(password)
       // récupération des valeurs entrées par utilisateur
-    let {userEmailValue, userPasswordValue} = recupererInputValue()
+      let {
+          userEmailValue,
+          userPasswordValue
+      } = recupererInputValue()
       submit(userEmailValue, userPasswordValue)
-      if (localStorage.getItem("token") !==''){
-    console.log("utilisateur connecté")
-  }
-  })}
-  
-  let Log = document.getElementById("Log")
-  // quand on clique sur l'élément log (écrit logout quand on est connecté), le token se supprime donc on obtient une déconnection
-  function LogOut(){
-    localStorage.removeItem("token")
-    Log.innerText="login"
-  }
+      if (localStorage.getItem("token") !== '') {
+          console.log("utilisateur connecté")
+      }
+  })
+}
 
-  function isConnected(){
-  Log.addEventListener('click', function(){
-    // si token, la fonction logout se met en route
-    if (localStorage.getItem("token")){
-      LogOut()
-      console.log("utilisateur deconnecté")
-      // si pas de token, redirection vers connectionpage
-    }else{
-      window.location.href = "connectionpage.html"
-    }
+let Log = document.getElementById("Log")
+// quand on clique sur l'élément log (écrit logout quand on est connecté), le token se supprime donc on obtient une déconnection
+function LogOut() {
+  localStorage.removeItem("token")
+  Log.innerText = "login"
+}
+
+function isConnected() {
+  Log.addEventListener('click', function() {
+      // si token, la fonction logout se met en route
+      if (localStorage.getItem("token")) {
+          LogOut()
+          console.log("utilisateur deconnecté")
+          // si pas de token, redirection vers connectionpage
+      } else {
+          window.location.href = "connectionpage.html"
+      }
   })
 }
 
 // si champ vide quand submit : boxshadow
 // regex deja présent par défaut
-function verifierChamp(balise){
-  if (balise.value ===""){
-    balise.style.boxShadow = "0px 0px 8px #9e1e1e"
-  }else{
-    balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
+function verifierChamp(balise) {
+  if (balise.value === "") {
+      balise.style.boxShadow = "0px 0px 8px #9e1e1e"
+  } else {
+      balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
   }
 }
-  
+
 login()
 isConnected()
