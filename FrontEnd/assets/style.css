@@ -295,9 +295,7 @@ main{
 .photoGalleryModal .buttonTrash{
 	background-color: black;
 	border : none;
-	position: relative;
-	left: 50px;
-	top: 20px;
+	position: absolute;
 }
 .conteneurButtonAjout .buttonAjoutPhoto, .conteneurButtonValider .buttonValider{
 	font-family: 'Syne';
@@ -391,5 +389,5 @@ main{
 	flex-direction: column;
 }
 #apercu .aperçu-image{
-	width: 125px;
+	height: 168px;
 }

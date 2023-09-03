@@ -37,7 +37,6 @@ function submit(username, password) {
               Log.innerText = "logout"
               //   redirection accueil
               window.location.href = 'index.html';
-
           } else {
               throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe, veuillez réessayer");
           }

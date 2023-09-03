@@ -1,15 +1,72 @@
+let token = localStorage.getItem("token")
+
+
+// effacer contenu gallery html
+function deleteGalleryWorks() {
+    let gallery = document.querySelector(".gallery")
+    gallery.innerHTML = ''
+}
+// deleteGalleryWorks()
+
+// récupération travaux 
+function getAllWorks() {
+  return fetch("http://localhost:5678/api/works")
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error('La requête a échoué.');
+          }
+          return response.json();
+      })
+      .then((allWorks) => {
+          // mettre les données dans le local storage
+          localStorage.setItem("mydata1", JSON.stringify(allWorks));
+          return allWorks;
+      })
+      .catch((error) => {
+          console.error("Erreur lors de la récupération des données :", error);
+          throw error; 
+      });
+}
+getAllWorks()
+
+let allWorks = JSON.parse(localStorage.getItem("mydata1"))
+
+// générer galerie avec les travaux récupérés
+function genererGallery(Works) {
+    // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
+    for (let i = 0; i < Works.length; i++) {
+        // on récupère la balise div avec classe gallery déjà présente dans html
+        let gallery = document.querySelector(".gallery")
+        // on crée une balise figure qui contiendra chaque élément work
+        const workElement = document.createElement("figure")
+        // on crée une balise image
+        const imgElement = document.createElement("img")
+        // on met la source des images, que je connais grâce console.log(allWorks). on utilise l'indice i, comme ca on va obtenir chaque élémént de la liste de l'api.
+        imgElement.src = Works[i].imageUrl
+        // on crée balise ficaption qui contiendra le titre de l'image
+        const figCaption = document.createElement("figcaption")
+        // on met le texte de title dans la balise figcaption
+        figCaption.innerText = Works[i].title
+        // on met les div workElement dans gallery
+        gallery.appendChild(workElement)
+        // on met les images dans chaque div workElement
+        workElement.appendChild(imgElement)
+        // on met chaque figcaption dans chaque div workElement
+        workElement.appendChild(figCaption)
+    }
+}
+genererGallery(allWorks)
+
+// function de deconnexion : supprime token, cache barre noire, écrit login, supprime lien modifiation, recrée les filtres
 function LogOut() {
   localStorage.removeItem("token")
   const barreNoire = document.getElementById("BarreNoir")
   barreNoire.style.display = "none"
   Log.innerText = "login"
-  // supprime le lien modif
   h2modif.innerHTML = '<h2 class="titreMesProjets">Mes Projets</h2>'
   buttonFiltreTous()
   buttonFiltresAll()
 }
-
-
 
 
 // si on clique sur log alors que le token est présent, le token se supprime, si le token est absent alors on est redirigé vers la page de connection
@@ -24,7 +81,7 @@ function deconnectionRedirection() {
       }
   })
 }
-// si le token est présent, log affiche logout
+// si le token est présent, log affiche logout, le lien de modif apparaît, divFiltre disparaît, barre noire apparaît
 function isConnected() {
   if (localStorage.getItem('token')) {
       console.log('Le localStorage contient un token.');
@@ -56,7 +113,7 @@ isConnected()
 deconnectionRedirection()
 
 
-let token = localStorage.getItem("token")
+
 
 
 
@@ -65,7 +122,7 @@ let modal = null
 const flecheRetour = document.querySelector(".fa-arrow-left")
 const modal1 = document.querySelector(".modal1")
 const modal2 = document.querySelector(".modal2")
-
+let formulaireAjout = document.getElementById("formulaireAjout")
 
 const openModal = function(e) {
   e.preventDefault()
@@ -79,6 +136,7 @@ const openModal = function(e) {
   modal.querySelector('.Modalclose').addEventListener("click", closeModal)
   modal.querySelector('.modalConteneur').addEventListener("click", stopPropagation)
 }
+const fileInput = document.getElementById("ajout_photo");
 
 const closeModal = function(e) {
   if (modal === null) return
@@ -177,10 +235,14 @@ function deleteWork(idWork) {
       })
       .then(response => {
           if (!response.ok) {
+              
               throw new Error('erreur');
           }
+          alert("Élément supprimé")
           // supression des travaux localstorage pour refaire la gallerie
-          localStorage.removeItem("mydata");
+          // localStorage.removeItem("mydata1");
+          
+
           // fonction qui refait la gallerie sans les éléments supprimés: gallery à jour
           getNewWorks();
       })
@@ -189,16 +251,23 @@ function deleteWork(idWork) {
       });
 }
 
-
-function getNewWorks() {
+function getNewWorks(idWork) {
   fetch("http://localhost:5678/api/works")
       .then(response => response.json())
       .then(data => {
-          // récupère work a jour, sans élément supprimé
-          localStorage.setItem("mydata3", JSON.stringify(data));
+          console.log("Données récupérées depuis l'API : ", data);
+
+          deleteGalleryWorks();
+
+          const filteredData = data.filter(item => item.id !== idWork);
+          console.log("Données filtrées : ", filteredData);
+
+          localStorage.setItem("mydata3", JSON.stringify(filteredData));
+
           let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
-          // mettre la gallery à 0 avant de refaire la gallery pour ne pas qu'il y est de doublon
-          deleteGalleryWorks()
+          
+          console.log("Nouvelles données dans le stockage local : ", getnewWorks);
+
           genererGallery(getnewWorks);
           genererGalleryModal(getnewWorks);
       })
@@ -206,6 +275,28 @@ function getNewWorks() {
           console.error('problème requête GET :', error);
       });
 }
+
+// function getNewWorks(idWork) {
+//   fetch("http://localhost:5678/api/works")
+//       .then(response => response.json())
+//       .then(data => {
+//           deleteGalleryWorks()
+//           // récupère work a jour, sans élément supprimé
+//           localStorage.setItem("mydata3", JSON.stringify(data));
+
+//           let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
+//           // récupère work a jour, sans élément supprimé
+//           localStorage.setItem("mydata3", JSON.stringify(data.filter(item => item.id !== idWork)));
+          
+//           // mettre la gallery à 0 avant de refaire la gallery pour ne pas qu'il y est de doublon
+          
+//           genererGallery(getnewWorks);
+//           genererGalleryModal(getnewWorks);
+//       })
+//       .catch(error => {
+//           console.error('problème requête GET :', error);
+//       });
+// }
 
 function createButtonAjout() {
   const buttonAjoutPhoto = document.createElement("button")
@@ -246,7 +337,6 @@ function createButtonValider() {
 createButtonValider()
 
 const categorie_select = document.getElementById("categorie_select")
-console.log(categorie_select)
 
 function createOptionSelected() {
   const defaultOption = document.createElement("option");
@@ -268,12 +358,13 @@ createOptionSelected()
 
 
 
-// selection élement dont on veut avoir l'aperçu et la la 
-const fileInput = document.getElementById("ajout_photo");
+// selectionne élement dont on veut avoir l'aperçu  
+
 const preview = document.getElementById("apercu");
 let reader = new FileReader();
 
 // Écoutez les changements dans le champ de fichier
+function showpreview (){
 fileInput.addEventListener("change", function() {
 
   // Vérifiez s'il y a un fichier sélectionné
@@ -301,13 +392,11 @@ fileInput.addEventListener("change", function() {
       // Lire contenu fichier en tant que données URL (base64)
       reader.readAsDataURL(fileInput.files[0]);
   }
-});
+})};
 
-
+showpreview()
 
 const buttonValider = document.querySelector(".buttonValider")
-
-let formulaireAjout = document.getElementById("formulaireAjout")
 
 
 // verifier champ non vide, sinon boxshadow rouge
@@ -326,11 +415,10 @@ function verifierChampFichier(balise) {
       alert("Veuillez sélectionner un fichier.");
   }
 }
+
 let userTitleInput = document.getElementById("TitreForm")
 let userCategorieInput = document.getElementById("categorie_select")
 let userImageInput = document.getElementById("ajout_photo")
-
-
 
 function recupererInputValueAjout() {
 
@@ -345,16 +433,9 @@ function recupererInputValueAjout() {
   }
 }
 
-
-
-
 formulaireAjout.addEventListener("submit", function(event) {
   let formData = new FormData()
-  let {
-      title,
-      category,
-      image
-  } = recupererInputValueAjout()
+  let {title, category, image} = recupererInputValueAjout()
   event.preventDefault();
   verifierChamp(TitreForm)
   verifierChamp(categorie_select)
@@ -370,25 +451,59 @@ formulaireAjout.addEventListener("submit", function(event) {
       },
       body: formData
   })
-  .then((res)=>{
-    if (res.ok){
-      return res.json()
+  .then((res) => {
+    if (res.ok) {
+      
+      alert("Nouvel élement ajouté avec succès")
+      modal.style.display="none"
+      resetForm()   
+      
+      deleteGalleryWorks()
+      getNewWorks()
+      return res.json(); 
+      
+    } else {     
+      console.error("Erreur lors de l'ajout de l'élément.");
     }
   })
-})
+  .catch((error) => {
+    
+    console.error("Une erreur s'est produite : ", error);
+  });
+});
 
 
-function buttonValiderColor(balise){
-  balise.addEventListener("input",function(){
-    if (TitreForm.value !=="" && categorie_select.value !=="" && ajout_photo.files.length > 0){
-    buttonValider.style.backgroundColor="#1D6154"
-    buttonValider.style.border="#1D6154"
-  }else{
-    buttonValider.style.backgroundColor="#A7A7A7"
-    buttonValider.style.border="#A7A7A7"
+function buttonValiderColor() {
+  const TitreForm = document.getElementById("TitreForm");
+  const categorie_select = document.getElementById("categorie_select");
+  const ajout_photo = document.getElementById("ajout_photo");
+  const buttonValider = document.querySelector(".buttonValider");
+  TitreForm.addEventListener("input", updateButtonColor);
+  categorie_select.addEventListener("input", updateButtonColor);
+  ajout_photo.addEventListener("input", updateButtonColor);
+
+  function updateButtonColor() {
+    if (TitreForm.value !== "" && categorie_select.value !== "" && ajout_photo.files.length > 0) {
+      buttonValider.style.backgroundColor = "#1D6154";
+      buttonValider.style.border = "#1D6154";
+    } else {
+      buttonValider.style.backgroundColor = "#A7A7A7";
+      buttonValider.style.border = "#A7A7A7";
+    }
   }
-  })
-  
 }
-buttonValiderColor(TitreForm)
-buttonValiderColor(categorie_select)
+
+buttonValiderColor();
+
+
+function resetForm () {
+  formulaireAjout.reset()
+  const logoimage = document.querySelector(".fa-image")
+      logoimage.style.display = null
+      const pAjout = document.querySelector(".pAjout")
+      pAjout.style.display = null
+      const ajout_photos = document.getElementById("ajout_photos")
+      ajout_photos.style.display = null
+      const apercu = document.querySelector(".aperçu-image")
+      apercu.style.display="none"
+}
