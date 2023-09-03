@@ -237,6 +237,8 @@ function createButtonValider() {
   buttonValider.classList = ("buttonValider")
   buttonValider.innerText = "Valider"
   buttonValider.type = ("submit")
+  buttonValider.style.backgroundColor="#A7A7A7"
+  buttonValider.style.border="#A7A7A7"
   const conteneurButtonValider = document.querySelector(".conteneurButtonValider")
   conteneurButtonValider.appendChild(buttonValider)
 }
@@ -344,6 +346,8 @@ function recupererInputValueAjout() {
 }
 
 
+
+
 formulaireAjout.addEventListener("submit", function(event) {
   let formData = new FormData()
   let {
@@ -356,10 +360,8 @@ formulaireAjout.addEventListener("submit", function(event) {
   verifierChamp(categorie_select)
   verifierChampFichier(document.getElementById("ajout_photo"))
   formData.append("image", image)
-  console.log(image)
   formData.append("title", title)
   formData.append("category", category)
-
   fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
@@ -374,3 +376,19 @@ formulaireAjout.addEventListener("submit", function(event) {
     }
   })
 })
+
+
+function buttonValiderColor(balise){
+  balise.addEventListener("input",function(){
+    if (TitreForm.value !=="" && categorie_select.value !=="" && ajout_photo.files.length > 0){
+    buttonValider.style.backgroundColor="#1D6154"
+    buttonValider.style.border="#1D6154"
+  }else{
+    buttonValider.style.backgroundColor="#A7A7A7"
+    buttonValider.style.border="#A7A7A7"
+  }
+  })
+  
+}
+buttonValiderColor(TitreForm)
+buttonValiderColor(categorie_select)
