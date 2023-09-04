@@ -255,9 +255,9 @@ function getNewWorks(idWork) {
   fetch("http://localhost:5678/api/works")
       .then(response => response.json())
       .then(data => {
-          console.log("données ", data);
+          console.log("Données récupérées depuis l'API : ", data);
 
-          deleteGalleryWorks()      
+          deleteGalleryWorks();
 
           const filteredData = data.filter(item => item.id !== idWork);
           console.log("Données filtrées : ", filteredData);
