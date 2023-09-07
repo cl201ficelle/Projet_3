@@ -1,5 +1,5 @@
 let token = localStorage.getItem("token")
-
+let allWorks = JSON.parse(localStorage.getItem("mydata1"))
 
 // effacer contenu gallery html
 function deleteGalleryWorks() {
@@ -8,8 +8,27 @@ function deleteGalleryWorks() {
 }
 deleteGalleryWorks()
 
+
+async function initialisation(){
+  await getAllWorks()
+  allWorks = JSON.parse(localStorage.getItem("mydata1"))
+  genererGallery(allWorks)
+}
+
+initialisation()
+  let photoGalleryModal = document.querySelector('.photoGalleryModal')
+  async function initialisationModal(){
+  allWorks = JSON.parse(localStorage.getItem("mydata1"))
+
+  genererGalleryModal(allWorks)
+  
+}
+
+initialisationModal()
+
+
 // récupération travaux 
-function getAllWorks() {
+async function getAllWorks() {
   return fetch("http://localhost:5678/api/works")
       .then((response) => {
           if (!response.ok) {
@@ -27,14 +46,14 @@ function getAllWorks() {
           throw error; 
       });
 }
-getAllWorks()
 
-let allWorks = JSON.parse(localStorage.getItem("mydata1"))
+
+
 
 // générer galerie avec les travaux récupérés
 function genererGallery(Works) {
     for (let i = 0; i < Works.length; i++) {
-        let gallery = document.querySelector(".gallery")
+        const gallery = document.querySelector(".gallery")
         const workElement = document.createElement("figure")
         const imgElement = document.createElement("img")
         imgElement.src = Works[i].imageUrl
@@ -45,7 +64,7 @@ function genererGallery(Works) {
         workElement.appendChild(figCaption)
     }
 }
-genererGallery(allWorks)
+
 
 // function de deconnexion : supprime token, cache barre noire, écrit login, supprime lien modifiation, recrée les filtres
 function LogOut() {
@@ -152,7 +171,7 @@ window.addEventListener("keydown", function(e) {
   }
 })
 
-let photoGalleryModal = document.querySelector('.photoGalleryModal')
+
 
 function genererGalleryModal(Works) {
   photoGalleryModal.innerHTML = ""
@@ -194,7 +213,7 @@ function genererGalleryModal(Works) {
   deleteWorkTrash()
 }
 
-genererGalleryModal(allWorks)
+
 
 function deleteWorkTrash() {
   // recupère les boutons trash
@@ -252,9 +271,9 @@ function getNewWorks(idWork) {
           const filteredData = data.filter(item => item.id !== idWork);
           console.log("Données filtrées : ", filteredData);
 
-          localStorage.setItem("mydata3", JSON.stringify(filteredData));
+          localStorage.setItem("mydata1", JSON.stringify(filteredData));
 
-          let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
+          let getnewWorks = JSON.parse(localStorage.getItem("mydata1"));
           
           console.log("Nouvelles données dans le stockage local : ", getnewWorks);
 
