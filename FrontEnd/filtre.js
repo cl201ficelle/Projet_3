@@ -40,12 +40,8 @@ function showTous(buttonFiltreTous) {
         setButtonStyle(buttonFiltreTous)
         // Mettre à jour le bouton actif
         activeButton = buttonFiltreTous;
-        const tousTravaux = allWorks.filter(function(tousTravaux) {
-            return tousTravaux
-        })
         document.querySelector(".gallery").innerHTML = ""
-        genererGallery(tousTravaux)
-        console.log(tousTravaux)
+        genererGallery(allWorks)
     })
 }
 
@@ -64,15 +60,11 @@ function buttonFiltresAll() {
 
 // filtre autres boutons
 function showFiltered(buttonFiltre) {
-    // j'ajoute les changements de style au moment du click
     buttonFiltre.addEventListener("click", () => {
-        // s'il y a un bouton actif on enleve le style au bouton précédemment actif
         if (activeButton) {
             removeButtonStyle(activeButton)
         }
-        // on applique ce style au bouton maintenant actif
         setButtonStyle(buttonFiltre)
-        // Mettre à jour le bouton actif
         activeButton = buttonFiltre
         const worksByCategory = allWorks.filter(function(allWorks) {
             return allWorks.category.name === buttonFiltre.textContent
