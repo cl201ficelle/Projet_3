@@ -1,5 +1,7 @@
 let token = localStorage.getItem("token")
-let allWorks = JSON.parse(localStorage.getItem("mydata1"))
+let allWorks = JSON.parse(localStorage.getItem("works"))
+const photoGalleryModal = document.querySelector('.photoGalleryModal')
+
 
 // effacer contenu gallery html
 function deleteGalleryWorks() {
@@ -8,24 +10,13 @@ function deleteGalleryWorks() {
 }
 deleteGalleryWorks()
 
-
+// attendre d'avoir les travaux avant de les récupérer du local storage
 async function initialisation(){
   await getAllWorks()
-  allWorks = JSON.parse(localStorage.getItem("mydata1"))
+  allWorks = JSON.parse(localStorage.getItem("works"))
   genererGallery(allWorks)
 }
-
 initialisation()
-  let photoGalleryModal = document.querySelector('.photoGalleryModal')
-  async function initialisationModal(){
-  allWorks = JSON.parse(localStorage.getItem("mydata1"))
-
-  genererGalleryModal(allWorks)
-  
-}
-
-initialisationModal()
-
 
 // récupération travaux 
 async function getAllWorks() {
@@ -38,7 +29,7 @@ async function getAllWorks() {
       })
       .then((allWorks) => {
           // mettre les données dans le local storage
-          localStorage.setItem("mydata1", JSON.stringify(allWorks));
+          localStorage.setItem("works", JSON.stringify(allWorks));
           return allWorks;
       })
       .catch((error) => {
@@ -46,9 +37,6 @@ async function getAllWorks() {
           throw error; 
       });
 }
-
-
-
 
 // générer galerie avec les travaux récupérés
 function genererGallery(Works) {
@@ -65,8 +53,7 @@ function genererGallery(Works) {
     }
 }
 
-
-// function de deconnexion : supprime token, cache barre noire, écrit login, supprime lien modifiation, recrée les filtres
+// fonction de deconnexion : supprime token, cache barre noire, écrit login, supprime lien modifiation, recrée les filtres
 function LogOut() {
   localStorage.removeItem("token")
   const barreNoire = document.getElementById("BarreNoir")
@@ -76,7 +63,6 @@ function LogOut() {
   buttonFiltreTous()
   buttonFiltresAll()
 }
-
 
 // si on clique sur log alors que le token est présent, le token se supprime, si le token est absent alors on est redirigé vers la page de connection
 function deconnectionRedirection() {
@@ -90,6 +76,7 @@ function deconnectionRedirection() {
       }
   })
 }
+
 // si le token est présent, log affiche logout, le lien de modif apparaît, divFiltre disparaît, barre noire apparaît
 function isConnected() {
   if (localStorage.getItem('token')) {
@@ -101,7 +88,6 @@ function isConnected() {
       barreNoire.style.display = null
   }
 }
-
 
 // fonction qui créé icone et lien de modif
 function creationLienModif() {
@@ -121,17 +107,19 @@ function creationLienModif() {
 isConnected()
 deconnectionRedirection()
 
-
-
-
-
-
+// attendre d'avoir les travaux avant de les récupérer du local storage
+async function initialisationModal(){
+  allWorks = JSON.parse(localStorage.getItem("works"))
+  genererGalleryModal(allWorks)
+}
+initialisationModal()
 
 let modal = null
 const flecheRetour = document.querySelector(".fa-arrow-left")
 const modal1 = document.querySelector(".modal1")
 const modal2 = document.querySelector(".modal2")
-let formulaireAjout = document.getElementById("formulaireAjout")
+const formulaireAjout = document.getElementById("formulaireAjout")
+
 
 const openModal = function(e) {
   e.preventDefault()
@@ -171,12 +159,9 @@ window.addEventListener("keydown", function(e) {
   }
 })
 
-
-
+// fonction qui génère la galerie de la modale
 function genererGalleryModal(Works) {
   photoGalleryModal.innerHTML = ""
-
-  // mise en place du compteur : initialisation de i, pour i < longueur work, on incrémente i
   for (let i = 0; i < Works.length; i++) {
       // on crée une balise figure qui contiendra chaque élément work
       const workElement = document.createElement("figure")
@@ -213,8 +198,7 @@ function genererGalleryModal(Works) {
   deleteWorkTrash()
 }
 
-
-
+//fonction qui supprime les éléments au clique du trash correspondant 
 function deleteWorkTrash() {
   // recupère les boutons trash
   let buttonTrashList = document.querySelectorAll(".buttonTrash");
@@ -223,36 +207,26 @@ function deleteWorkTrash() {
       buttonTrash.addEventListener("click", function() {
           // id du work a supprimer = a id bouton trash cliqué
           const idWorkToDelete = buttonTrash.getAttribute("id");
-          console.log(idWorkToDelete);
           // supprimer le work selon quel bouton trash cliqué
           deleteWork(idWorkToDelete);
       });
   });
 }
 
+// suppression work selon clique sur trash
 function deleteWork(idWork) {
-  // recupère work selon son id swagger
   fetch(`http://localhost:5678/api/works/${idWork}`, {
-          // méthode suppression
           method: "DELETE",
           headers: {
-              // info dans swagger
               accept: "*/*",
-              // voir si on est bien authetifier pour faire l'action
               Authorization: `Bearer ${token}`
           }
       })
       .then(response => {
           if (!response.ok) {
-              
               throw new Error('erreur');
           }
           alert("Élément supprimé")
-          // supression des travaux localstorage pour refaire la gallerie
-          // localStorage.removeItem("mydata1");
-          
-
-          // fonction qui refait la gallerie sans les éléments supprimés: gallery à jour
           getNewWorks();
       })
       .catch(error => {
@@ -260,23 +234,15 @@ function deleteWork(idWork) {
       });
 }
 
+// faire la galerie sans le work supprimé
 function getNewWorks(idWork) {
   fetch("http://localhost:5678/api/works")
       .then(response => response.json())
       .then(data => {
-          console.log("Données récupérées depuis l'API : ", data);
-
           deleteGalleryWorks();
-
           const filteredData = data.filter(item => item.id !== idWork);
-          console.log("Données filtrées : ", filteredData);
-
-          localStorage.setItem("mydata1", JSON.stringify(filteredData));
-
-          let getnewWorks = JSON.parse(localStorage.getItem("mydata1"));
-          
-          console.log("Nouvelles données dans le stockage local : ", getnewWorks);
-
+          localStorage.setItem("works", JSON.stringify(filteredData));
+          let getnewWorks = JSON.parse(localStorage.getItem("works"));   
           genererGallery(getnewWorks);
           genererGalleryModal(getnewWorks);
       })
@@ -285,28 +251,7 @@ function getNewWorks(idWork) {
       });
 }
 
-// function getNewWorks(idWork) {
-//   fetch("http://localhost:5678/api/works")
-//       .then(response => response.json())
-//       .then(data => {
-//           deleteGalleryWorks()
-//           // récupère work a jour, sans élément supprimé
-//           localStorage.setItem("mydata3", JSON.stringify(data));
-
-//           let getnewWorks = JSON.parse(localStorage.getItem("mydata3"));
-//           // récupère work a jour, sans élément supprimé
-//           localStorage.setItem("mydata3", JSON.stringify(data.filter(item => item.id !== idWork)));
-          
-//           // mettre la gallery à 0 avant de refaire la gallery pour ne pas qu'il y est de doublon
-          
-//           genererGallery(getnewWorks);
-//           genererGalleryModal(getnewWorks);
-//       })
-//       .catch(error => {
-//           console.error('problème requête GET :', error);
-//       });
-// }
-
+// création bouton ajout photo
 function createButtonAjout() {
   const buttonAjoutPhoto = document.createElement("button")
   buttonAjoutPhoto.classList = ("buttonAjoutPhoto")
@@ -315,6 +260,7 @@ function createButtonAjout() {
   conteneurButtonAjout.appendChild(buttonAjoutPhoto)
 }
 
+// affichage modal 2 : ajout photo 
 function ajoutPhoto() {
   createButtonAjout()
   const buttonAjoutPhoto = document.querySelector(".buttonAjoutPhoto").addEventListener("click", function() {
@@ -324,14 +270,18 @@ function ajoutPhoto() {
   })
 }
 
+// si on clique sur flèche alors retour à modal1
+function retourModal1(){
 flecheRetour.addEventListener("click", function() {
   modal1.style.display = null
   modal2.style.display = "none"
   flecheRetour.style.color = "white"
 })
-
+}
+retourModal1()
 ajoutPhoto()
 
+// création bouton valider pour modal2
 function createButtonValider() {
   const buttonValider = document.createElement("button")
   buttonValider.classList = ("buttonValider")
@@ -346,15 +296,14 @@ function createButtonValider() {
 createButtonValider()
 
 const categorie_select = document.getElementById("categorie_select")
-
+// création menu déroulant avec option par défaut puis 3 catégories
 function createOptionSelected() {
   const defaultOption = document.createElement("option");
   defaultOption.innerText = "Choisir une catégorie";
   defaultOption.value = ""
-  defaultOption.selected = true; // selectionne automatiquement cette option par défaut
-  // Ajoutez cette option par défaut au menu déroulant
+  defaultOption.selected = true; 
+  // selectionne automatiquement cette option par défaut
   categorie_select.appendChild(defaultOption);
-
   for (let i = 0; i < allCategories.length; i++) {
       const optionCategorie = document.createElement("option")
       optionCategorie.innerText = allCategories[i].name
@@ -365,17 +314,13 @@ function createOptionSelected() {
 
 createOptionSelected()
 
-
-
 // selectionne élement dont on veut avoir l'aperçu  
-
 const preview = document.getElementById("apercu");
 let reader = new FileReader();
 
 // Écoutez les changements dans le champ de fichier
 function showpreview (){
 fileInput.addEventListener("change", function() {
-
   // Vérifiez s'il y a un fichier sélectionné
   if (fileInput.files && fileInput.files[0]) {
       // supprimer les éléments qui vont être remplacés par l'aperçu
@@ -429,8 +374,8 @@ let userTitleInput = document.getElementById("TitreForm")
 let userCategorieInput = document.getElementById("categorie_select")
 let userImageInput = document.getElementById("ajout_photo")
 
+// récupère valeur utilisateur
 function recupererInputValueAjout() {
-
   let title = userTitleInput.value;
   const selectedOption = userCategorieInput.options[userCategorieInput.selectedIndex];
   let category = parseInt(selectedOption.id, 10);
@@ -442,6 +387,8 @@ function recupererInputValueAjout() {
   }
 }
 
+// submit le formData
+function submitForm(){
 formulaireAjout.addEventListener("submit", function(event) {
   let formData = new FormData()
   let {title, category, image} = recupererInputValueAjout()
@@ -462,26 +409,25 @@ formulaireAjout.addEventListener("submit", function(event) {
   })
   .then((res) => {
     if (res.ok) {
-      
       alert("Nouvel élement ajouté avec succès")
       modal.style.display="none"
       resetForm()   
-      
       deleteGalleryWorks()
       getNewWorks()
-      return res.json(); 
-      
+      return res.json();   
     } else {     
       console.error("Erreur lors de l'ajout de l'élément.");
     }
   })
-  .catch((error) => {
-    
+  .catch((error) => { 
     console.error("Une erreur s'est produite : ", error);
   });
 });
+}
+submitForm()
 
 
+// bouton valider devient vert seulement si champs input remplie et fichier aussi
 function buttonValiderColor() {
   const TitreForm = document.getElementById("TitreForm");
   const categorie_select = document.getElementById("categorie_select");
@@ -504,10 +450,12 @@ function buttonValiderColor() {
 
 buttonValiderColor();
 
-
+// reset le formulaire quand une photo a été ajoutée
 function resetForm () {
-  formulaireAjout.reset()
-  const logoimage = document.querySelector(".fa-image")
+    buttonValider.style.backgroundColor = "#A7A7A7";
+      buttonValider.style.border = "#A7A7A7";
+      formulaireAjout.reset()
+      const logoimage = document.querySelector(".fa-image")
       logoimage.style.display = null
       const pAjout = document.querySelector(".pAjout")
       pAjout.style.display = null

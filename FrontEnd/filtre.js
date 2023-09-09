@@ -1,5 +1,5 @@
 const portfolio = document.getElementById("portfolio")
-let gallery = document.querySelector(".gallery")
+const gallery = document.querySelector(".gallery")
 const divFiltres = document.createElement("div")
 divFiltres.setAttribute("class", "divFiltres");
 portfolio.insertBefore(divFiltres, gallery)
@@ -12,14 +12,14 @@ function getAllCategories() {
         return response.json()
       })
       .then(function(allCategories) {
-        localStorage.setItem("mydata2", JSON.stringify(allCategories))
+        localStorage.setItem("categories", JSON.stringify(allCategories))
       })
       .catch(function(error) {
         console.error("Error fetching and storing data:", error)
       })
   }
 getAllCategories()
-let allCategories = JSON.parse(localStorage.getItem("mydata2"))
+let allCategories = JSON.parse(localStorage.getItem("categories"))
 
 // création bouton Tous
 function buttonFiltreTous() {
@@ -44,8 +44,6 @@ function showTous(buttonFiltreTous) {
         genererGallery(allWorks)
     })
 }
-
-
 buttonFiltreTous()
 
 // création autres boutons
