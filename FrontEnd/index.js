@@ -60,9 +60,9 @@ function LogOut() {
     barreNoire.style.display = "none"
     Log.innerText = "login"
     h2modif.innerHTML = '<h2 class="titreMesProjets">Mes Projets</h2>'
-    // buttonFiltreTous()
-    // buttonFiltresAll()
     divFiltres.style.display=null
+    deleteGalleryWorks()
+    initialisation()
 }
 
 // si on clique sur log alors que le token est présent, le token se supprime, si le token est absent alors on est redirigé vers la page de connection
