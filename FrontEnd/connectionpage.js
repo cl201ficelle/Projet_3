@@ -1,10 +1,12 @@
+const Log = document.getElementById("Log")
+
 // récupération de ce que l'user va écrire dans input
 function recupererInputValue() {
-  const userEmailInput = document.getElementById("email");
-  let userEmailValue = userEmailInput.value;
+  const userEmailInput = document.getElementById("email")
+  let userEmailValue = userEmailInput.value
 
-  const userPasswordInput = document.getElementById("password");
-  let userPasswordValue = userPasswordInput.value;
+  const userPasswordInput = document.getElementById("password")
+  let userPasswordValue = userPasswordInput.value
   return {
       userEmailValue,
       userPasswordValue
@@ -28,22 +30,22 @@ function submit(username, password) {
       .then(res => res.json())
       .then(data => {
           if (data.token) {
-              alert("Connexion réussie");
-              localStorage.setItem("token", data.token);
+              alert("Connexion réussie")
+              localStorage.setItem("token", data.token)
               Log.innerText = "logout"
-              window.location.href = 'index.html';
+              window.location.href = 'index.html'
           } else {
               throw new Error("Une erreur s’est glissée dans votre adresse e-mail ou votre mot de passe, veuillez réessayer");
           }
       })
       .catch((error) => {
-          alert(error.message);
+          alert(error.message)
       })
 }
 
 function login() {
   document.getElementById("login").addEventListener("submit", function(event) {
-      event.preventDefault();
+      event.preventDefault()
       verifierChamp(email)
       verifierChamp(password)
       let {
@@ -57,7 +59,6 @@ function login() {
   })
 }
 
-const Log = document.getElementById("Log")
 // suppression token = deconnexion 
 function LogOut() {
   localStorage.removeItem("token")
@@ -77,8 +78,7 @@ function isConnected() {
   })
 }
 
-// si champ vide quand submit : boxshadow
-// regex deja présent par défaut
+// si champ vide quand submit : boxshadow // regex deja présent par défaut
 function verifierChamp(balise) {
   if (balise.value === "") {
       balise.style.boxShadow = "0px 0px 8px #9e1e1e"

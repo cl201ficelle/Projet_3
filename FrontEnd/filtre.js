@@ -1,13 +1,16 @@
 const portfolio = document.getElementById("portfolio")
 const gallery = document.querySelector(".gallery")
 const divFiltres = document.createElement("div")
-divFiltres.setAttribute("class", "divFiltres");
+divFiltres.setAttribute("class", "divFiltres")
 portfolio.insertBefore(divFiltres, gallery)
 let activeButton = null
+let allCategories = null
+
+initialisation2()
 
 //  obtenir toutes les catégories variable globale
-function getAllCategories() {
-    fetch("http://localhost:5678/api/categories")
+async function getAllCategories() {
+    await fetch("http://localhost:5678/api/categories")
       .then(function(response) {
         return response.json()
       })
@@ -17,10 +20,15 @@ function getAllCategories() {
       .catch(function(error) {
         console.error("Error fetching and storing data:", error)
       })
-  }
-getAllCategories()
-let allCategories = JSON.parse(localStorage.getItem("categories"))
-
+    }
+    
+async function initialisation2()
+{
+    await getAllCategories()
+    allCategories = JSON.parse(localStorage.getItem("categories"))
+    buttonFiltreTous()
+    buttonFiltresAll(allCategories)
+}
 // création bouton Tous
 function buttonFiltreTous() {
     let buttonFiltreTous = document.createElement("button")
@@ -44,10 +52,10 @@ function showTous(buttonFiltreTous) {
         genererGallery(allWorks)
     })
 }
-buttonFiltreTous()
 
 // création autres boutons
-function buttonFiltresAll() {
+function buttonFiltresAll(allCategories) {
+    allCategories = JSON.parse(localStorage.getItem("categories"))
     for (let i = 0; i < allCategories.length; i++) {
         const buttonFiltre = document.createElement("button")
         buttonFiltre.innerText = allCategories[i].name
@@ -71,7 +79,6 @@ function showFiltered(buttonFiltre) {
         genererGallery(worksByCategory)
     })
 }
-buttonFiltresAll()
 
 // style du bouton actif  
 function setButtonStyle(button) {
@@ -83,5 +90,3 @@ function removeButtonStyle(button) {
     button.style.backgroundColor = "#FFFEF8"
     button.style.color = "#1D6154"
 }
-
-

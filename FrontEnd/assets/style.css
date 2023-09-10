@@ -277,6 +277,7 @@ main{
 }
 .modal1 img{
 	height: 103px;
+	width: auto;
 }
 .photoGalleryModal{
 	display:grid;
@@ -295,7 +296,10 @@ main{
 .photoGalleryModal .buttonTrash{
 	background-color: black;
 	border : none;
-	position: absolute;
+	position: relative;
+    left: 48px;
+    top: 23px;
+	border-radius: 2px;
 }
 .conteneurButtonAjout .buttonAjoutPhoto, .conteneurButtonValider .buttonValider{
 	font-family: 'Syne';
